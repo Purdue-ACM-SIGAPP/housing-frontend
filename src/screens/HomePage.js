@@ -2,6 +2,7 @@ import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../components/CustomButton";
+import SignUpButton from "../components/SignUpButton";
 
 export default function HomePage() {
   const navigation = useNavigation();
@@ -11,12 +12,21 @@ export default function HomePage() {
     navigation.navigate("React Native Maps");
   };
 
+  const handleSignUp = () => {
+    console.log("Going to Sign Up Page...");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ASP.NET + React Native Demo Project</Text>
       <View style={styles.buttonContainer}>
         <CustomButton
           initialText="Go to Maps"
+          updatedText="Loading..."
+          onPress={handleSubmit}
+        />
+        <SignUpButton
+          initialText="Sign Up"
           updatedText="Loading..."
           onPress={handleSubmit}
         />

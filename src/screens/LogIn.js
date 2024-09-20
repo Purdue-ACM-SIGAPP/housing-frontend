@@ -45,12 +45,13 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         marginBottom: 24,
+        color: '#4474ef',
     },
     input: {
         width: '80%',
         padding: 10,
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: '#020202',
         marginBottom: 12,
         borderRadius: 5,
     },

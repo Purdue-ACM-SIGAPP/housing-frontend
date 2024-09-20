@@ -21,6 +21,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="React Native Maps" component={MapPage} />
         <Stack.Screen name="NotFound" component={NotFoundPage} />
+        <Stack.Screen name="Sign-up" component={SignUp}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

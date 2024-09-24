@@ -12,7 +12,7 @@ export default function App() {
             Alert.alert('Invalid Credentials');
         }
     };
-//hello hi
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Purdue Paths</Text>

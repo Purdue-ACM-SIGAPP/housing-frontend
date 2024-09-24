@@ -15,7 +15,7 @@ export default function App() {
 //hello hi
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Login Page</Text>
+            <Text style={styles.title}>Purdue Paths</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Username"

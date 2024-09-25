@@ -6,7 +6,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomePage from "./src/screens/HomePage";
 import NotFoundPage from "./src/screens/NotFoundPage";
 import MapPage from "./src/screens/MapPage";
-import SignUp from "./src/components/SignUp";
 
 export default function App() {
   const Stack = createStackNavigator();

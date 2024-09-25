@@ -13,6 +13,10 @@ export default function App() {
         }
     };
 
+    const handleCreate = () => {
+        //TODO
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Purdue Paths</Text>
@@ -31,8 +35,12 @@ export default function App() {
             />
             <Button title="Login" onPress={handleLogin} />
             
-            <Text style = {styles.title}>Not registered yet? Create an Account</Text>
+            <div> 
+                <Text style = {styles.title}>Not registered yet? </Text>
                 style={styles.input}
+                <Button title="Create Account" onPress={handleCreate} />
+            </div>
+            
                 
         </View>
     );
@@ -60,3 +68,4 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
 });
+

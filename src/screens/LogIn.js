@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
 export default function App() {
+    const navigation = useNavigation();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = () => {
         if (username === 'admin' && password === 'password') {
             Alert.alert('Login Successful');
+            console.log("Going to Home Page...");
+            navigation.navigate("Home");
         } else {
             Alert.alert('Invalid Credentials');
         }
@@ -34,12 +38,12 @@ export default function App() {
                 secureTextEntry
             />
             <Button title="Login" onPress={handleLogin} />
-            
-            <div> 
+
+            {/*<div> 
                 <Text style = {styles.title}>Not registered yet? </Text>
                 style={styles.input}
                 <Button title="Create Account" onPress={handleCreate} />
-            </div>
+            </div> */}
             
                 
         </View>

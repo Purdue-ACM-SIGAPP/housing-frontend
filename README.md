@@ -1,4 +1,3 @@
 # housing-frontend
 
-Temp name (test)
-home
+FAQ Page

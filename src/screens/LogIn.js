@@ -19,6 +19,7 @@ export default function App() {
 
     const handleCreate = () => {
         //TODO
+        Alert.alert('Adrian Maliackel')
     };
 
     return (

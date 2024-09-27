@@ -38,13 +38,9 @@ export default function App() {
                 secureTextEntry
             />
             <Button title="Login" onPress={handleLogin} />
-
-            {/*<div> 
-                <Text style = {styles.title}>Not registered yet? </Text>
-                style={styles.input}
-                <Button title="Create Account" onPress={handleCreate} />
-            </div> */}
             
+            <Text style = {styles.title}>Not registered yet? </Text>
+            <Button title="Create Account" onPress={handleCreate} />
                 
         </View>
     );

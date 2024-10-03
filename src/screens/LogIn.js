@@ -24,7 +24,7 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Purdue Paths</Text>
+            <Text style={styles.title}>Login or Sign Up</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Username"
@@ -40,7 +40,7 @@ export default function App() {
             />
             <Button title="Login" onPress={handleLogin} />
             
-            <Text style = {styles.title}>Not registered yet? </Text>
+            <Text style = {styles.input}>Not registered yet? </Text>
             <Button title="Create Account" onPress={handleCreate} />
                 
         </View>
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         marginBottom: 24,
-        color: '#4474ef',
+        color: '#020202',
     },
     input: {
         width: '80%',
@@ -68,5 +68,8 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         borderRadius: 5,
     },
+    Button: {
+        color: '#ec9a9a'
+    }
 });
 

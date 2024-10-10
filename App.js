@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomePage from "./src/screens/HomePage";
 import NotFoundPage from "./src/screens/NotFoundPage";
 import MapPage from "./src/screens/MapPage";
+import SignUp from "./src/screens/SignUp";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -13,7 +14,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="SignUp"
         screenOptions={{
           headerShown: true, // Set to false to hide header
         }}
@@ -21,7 +22,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="React Native Maps" component={MapPage} />
         <Stack.Screen name="NotFound" component={NotFoundPage} />
-        <Stack.Screen name="Sign-up" component={SignUp}/>
+        <Stack.Screen name="SignUp" component={SignUp}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

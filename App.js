@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomePage from "./src/screens/HomePage";
 import NotFoundPage from "./src/screens/NotFoundPage";
 import MapPage from "./src/screens/MapPage";
+import EditProfile from "./src/screens/EditProfile";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -20,6 +21,7 @@ export default function App() {
       >
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="React Native Maps" component={MapPage} />
+        <Stack.Screen name="Edit Profile" component={EditProfile} />
         <Stack.Screen name="NotFound" component={NotFoundPage} />
       </Stack.Navigator>
     </NavigationContainer>

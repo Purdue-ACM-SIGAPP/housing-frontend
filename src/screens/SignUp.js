@@ -5,3 +5,4 @@ export default function SignUp() {
         <Text> "Testing cfddggdsgsdgdsdgsheck can you see THIS? " </Text>
     )
 }
+

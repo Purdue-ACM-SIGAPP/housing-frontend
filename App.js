@@ -19,9 +19,9 @@ export default function App() {
         screenOptions={{
           headerShown: true, // Set to false to hide header
         }}
-      > 
-          <Stack.Screen name="verification" component={verification} />
+      >
           <Stack.Screen name="Login" component={LogIn} />
+          <Stack.Screen name="verification" component={verification} />
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="React Native Maps" component={MapPage} />
         <Stack.Screen name="NotFound" component={NotFoundPage} />

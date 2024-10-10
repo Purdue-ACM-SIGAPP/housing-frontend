@@ -18,8 +18,7 @@ export default function App() {
     };
 
     const handleCreate = () => {
-        //TODO
-        Alert.alert('Adrian Maliackel')
+        navigation.navigate("verification")
     };
 
     return (

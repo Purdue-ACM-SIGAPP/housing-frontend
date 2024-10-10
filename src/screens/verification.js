@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
         padding: 16,
+        textAlign: 'left',
     },
     title: {
         fontSize: 24,

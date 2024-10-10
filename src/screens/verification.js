@@ -5,7 +5,7 @@ import HomePage from "./HomePage";
 
 export default function App() {
     const navigation = useNavigation();
-    const [username, setUsername] = useState('');
+    const [code, checkCode] = useState('');
     const [password, setPassword] = useState('');
 
     const handleVerify = () => {
@@ -19,8 +19,8 @@ export default function App() {
             <TextInput
                 style={styles.input}
                 placeholder="XXX-XXX"
-                value={username}
-                onChangeText={setUsername}
+                value={code}
+                onChangeText={checkCode}
             />
 
             <Button title="Verify" onPress={handleVerify} />

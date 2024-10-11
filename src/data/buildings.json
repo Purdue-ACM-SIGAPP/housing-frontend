@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "name": "Wilmeth Active Learning Center",
+    "acronym": "WALC",
+    "description": "The central library on campus.",
+    "imageUrl": "https://example.com/images/library.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Purdue Memorial Union",
+    "acronym": "PMU",
+    "description": "The heart of campus life, offering dining options, study spaces, and recreational activities.",
+    "imageUrl": "https://example.com/images/student-union.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Purdue University Student Health",
+    "acronym": "PUSH",
+    "description": "The university's teaching hospital and research facility for health sciences.",
+    "imageUrl": "https://example.com/images/medical-center.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Lawson Computer Science Building",
+    "acronym": "LWSN",
+    "description": "Cutting-edge facilities for computer science education and research.",
+    "imageUrl": "https://example.com/images/cs-building.jpg"
+  }
+]

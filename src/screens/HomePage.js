@@ -13,7 +13,7 @@ export default function HomePage() {
 
   const handleBuildingList = () => {
     console.log("Going to Building List...");
-    navigation.navigate("Building List"); // Change "BuildingList" to "Building List"
+    navigation.navigate("Building List");
   };
 
   return (

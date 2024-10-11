@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CustomButton from '../components/CustomButton';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -8,7 +8,7 @@ export default function BuildingListPage() {
   const navigation = useNavigation();
   const [buildings, setBuildings] = useState([]);
 
-  const buildingId = "66ba8693354b31489f8e95b6";
+  // const buildingId = "66ba8693354b31489f8e95b6";
 
   useEffect(() => {
     const loadBuildings = async () => {
@@ -26,14 +26,14 @@ export default function BuildingListPage() {
       //   setBuildings(buildingsData);
       // } catch (error) {
       //   console.error('Error fetching buildings data from API:', error);
-        try {
-          // If API fetch fails, load data from local JSON file
-          const buildingsData = require('../data/buildings.json');
-          setBuildings(buildingsData);
-          console.log('Loaded buildings data from local JSON file');
-        } catch (localError) {
-          console.error('Error loading buildings data from local file:', localError);
-        }
+      try {
+        // If API fetch fails, load data from local JSON file
+        const buildingsData = require('../data/buildings.json');
+        setBuildings(buildingsData);
+        console.log('Loaded buildings data from local JSON file');
+      } catch (localError) {
+        console.error('Error loading buildings data from local file:', localError);
+      }
       // }
     };
 
@@ -46,13 +46,14 @@ export default function BuildingListPage() {
       <View style={styles.directionsContainer}>
         <Icon name="directions" size={24} color="#4CAF50" />
       </View>
-      <View 
+      <TouchableOpacity 
         style={styles.buildingCard}
+        onPress={() => navigation.navigate('Building Details', { building: item })}
       >
         <Text style={styles.buildingName}>{item.name}</Text>
         <Text style={styles.buildingAcronym}>{item.acronym}</Text>
         <Text style={styles.buildingDescription}>{item.description}</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 

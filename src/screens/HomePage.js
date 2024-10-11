@@ -11,6 +11,11 @@ export default function HomePage() {
     navigation.navigate("React Native Maps");
   };
 
+  const handleBuildingList = () => {
+    console.log("Going to Building List...");
+    navigation.navigate("Building List"); // Change "BuildingList" to "Building List"
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ASP.NET + React Native Demo Project</Text>
@@ -19,6 +24,12 @@ export default function HomePage() {
           initialText="Go to Maps"
           updatedText="Loading..."
           onPress={handleSubmit}
+        />
+        <CustomButton
+          initialText="View Buildings"
+          updatedText="Loading..."
+          onPress={handleBuildingList}
+          style={styles.secondButton}
         />
       </View>
     </View>
@@ -43,5 +54,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 16, // Equivalent to mt-4
+  },
+  secondButton: {
+    marginTop: 12, // Add some space between buttons
   },
 });

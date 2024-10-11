@@ -10,22 +10,22 @@ import LogIn from "./src/screens/LogIn";
 import verification from "./src/screens/verification";
 
 export default function App() {
-  const Stack = createStackNavigator();
+    const Stack = createStackNavigator();
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="LogIn"
-        screenOptions={{
-          headerShown: true, // Set to false to hide header
-        }}
-      >
-          <Stack.Screen name="verification" component={verification} />
-          <Stack.Screen name="Login" component={LogIn} />
-        <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="React Native Maps" component={MapPage} />
-        <Stack.Screen name="NotFound" component={NotFoundPage} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+                initialRouteName="LogIn"
+                screenOptions={{
+                    headerShown: true, // Set to false to hide header
+                }}
+            >
+                <Stack.Screen name="Login" component={LogIn} />
+                <Stack.Screen name="verification" component={verification} />
+                <Stack.Screen name="Home" component={HomePage} />
+                <Stack.Screen name="React Native Maps" component={MapPage} />
+                <Stack.Screen name="NotFound" component={NotFoundPage} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }

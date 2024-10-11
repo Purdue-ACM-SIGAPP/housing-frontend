@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import HomePage from "./HomePage";
 
 export default function App() {
     const navigation = useNavigation();
@@ -8,7 +9,7 @@ export default function App() {
     const [password, setPassword] = useState('');
 
     const handleVerify = () => {
-        //TODO
+        navigation.navigate("Home")
     };
 
     return (
@@ -23,7 +24,7 @@ export default function App() {
             />
 
             <Button title="Verify" onPress={handleVerify} />
-            
+
             <Text>Resend Code</Text>
 
         </View>

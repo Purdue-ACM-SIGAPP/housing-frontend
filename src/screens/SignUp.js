@@ -9,10 +9,12 @@ export default function SignUpPage() {
   const handleSignUp = () => {
     if (username && email && password) {
       Alert.alert("Sign Up Successful", `Username: ${username}\nEmail: ${email}`);
-    } else {
-      Alert.alert("Error", "Please fill out all fields");
+    }else {
+      Alert.alert("Error", "Please  all fields");
     }
   };
+
+  
 
   return (
     <View style={styles.container}>

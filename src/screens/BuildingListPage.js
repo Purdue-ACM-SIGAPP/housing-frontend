@@ -60,6 +60,20 @@ export default function BuildingListPage() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Buildings at Purdue</Text>
+      <View style={styles.buttonContainer}>
+        <CustomButton
+          initialText="Filter"
+          updatedText="Filtering..."
+          onPress={() => {/* Implement filter logic */}}
+          style={styles.filterButton}
+        />
+        <CustomButton
+          initialText="Sort"
+          updatedText="Sorting..."
+          onPress={() => {/* Implement sort logic */}}
+          style={styles.sortButton}
+        />
+      </View>
       <FlatList
         data={buildings}
         renderItem={renderItem}

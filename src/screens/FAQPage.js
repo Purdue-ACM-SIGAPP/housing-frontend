@@ -6,25 +6,36 @@ import DropdownBox from "../components/DropdownBox";
 export default function FAQPage() {
   const navigation = useNavigation();
 
-  // const handleSubmit = () => {
-  //   console.log("Going to Map Page..."); //telling console what's going on 
-  //   navigation.navigate("React Native Maps");  //sending person to wherever/causing change
-  // };
+  // Mock data for questions and answers
+  const questions = [
+    "How do I leave a review?",
+    "How do I upload an image/video for a building?",
+    "Is off-campus housing also included in the app?",
+    "How do I make an account?",
+    "How do I report errors?",
+    "What is [Question 6]?",
+  ];
 
-  const handleDropDown = () => {
-    console.log("Opening question...");
-    //TODO: add thing here that changes the state of the drop down from closed to open
-  }
+  const answers = [
+    "Answer 1: You can leave a review by...",
+    "Answer 2: To upload an image or video...",
+    "Answer 3: Yes, off-campus housing is...",
+    "Answer 4: To make an account, follow these steps...",
+    "Answer 5: Report errors by clicking on...",
+    "Answer 6: Here is how you can find more details about [Question 6]...",
+  ];
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>FAQ Page</Text>
       <View style={styles.buttonContainer}>
-      <DropdownBox
-          question="On campus housing included?"
-          answer = "yes"
-          onPress={handleDropDown}
-        />
+        {questions.map((question, index) => (
+          <DropdownBox
+            key={index}
+            question={question}
+            answer={answers[index]} // Link each answer with its respective question
+          />
+        ))}
       </View>
     </View>
   );

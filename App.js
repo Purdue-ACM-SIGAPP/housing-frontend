@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 // Pages
 import HomePage from "./src/screens/HomePage";
 import NotFoundPage from "./src/screens/NotFoundPage";
-import MapPage from "./src/screens/MapPage";
+import FAQPage from "./src/screens/FAQPage";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -19,7 +19,7 @@ export default function App() {
         }}
       >
         <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="React Native Maps" component={MapPage} />
+        <Stack.Screen name="FAQPage" component={FAQPage} />
         <Stack.Screen name="NotFound" component={NotFoundPage} />
       </Stack.Navigator>
     </NavigationContainer>

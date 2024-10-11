@@ -12,13 +12,16 @@ export default function App() {
             Alert.alert('Login Successful');
             console.log("Going to Home Page...");
             navigation.navigate("Home");
-        } else {
+        } else if (username.indexOf("@gmail.com") >= 0) {
+            navigation.navigate("verification")
+        }
+        else {
             Alert.alert('Invalid Credentials');
         }
     };
 
     const handleCreate = () => {
-        navigation.navigate("verification")
+        Alert.alert("Karthikeyan")
     };
 
     return (

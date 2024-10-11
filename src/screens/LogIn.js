@@ -12,14 +12,16 @@ export default function App() {
             Alert.alert('Login Successful');
             console.log("Going to Home Page...");
             navigation.navigate("Home");
-        } else {
+        } else if (username.indexOf("@gmail.com") >= 0) {
+            navigation.navigate("verification")
+        }
+        else {
             Alert.alert('Invalid Credentials');
         }
     };
 
     const handleCreate = () => {
-        //TODO
-        Alert.alert('Adrian Maliackel')
+        Alert.alert("Karthikeyan")
     };
 
     return (
@@ -39,10 +41,10 @@ export default function App() {
                 secureTextEntry
             />
             <Button title="Login" onPress={handleLogin} />
-            
+
             <Text style = {styles.input}>Not registered yet? </Text>
             <Button title="Create Account" onPress={handleCreate} />
-                
+
         </View>
     );
 }
@@ -72,4 +74,3 @@ const styles = StyleSheet.create({
         color: '#ec9a9a'
     }
 });
-

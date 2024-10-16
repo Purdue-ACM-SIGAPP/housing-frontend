@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 16,
     marginBottom: 16,
+    borderRadius: 6,
+    backgroundColor: "rgba(134, 160, 173, 0.3)",
+    padding: 8,
+    marginRight: "5%",
+    marginLeft: "5%",
   },
   question: {
     fontSize: 18,
@@ -29,7 +34,7 @@ const styles = StyleSheet.create({
   },
   answers: {
     fontSize: 18,
-    marginTop: 8, // Add some space between the question and answers
+    marginTop: 8,
   },
 });
 

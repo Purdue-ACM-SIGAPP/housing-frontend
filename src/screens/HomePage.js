@@ -21,7 +21,7 @@ export default function HomePage() {
       <Text style={styles.title}>ASP.NET + React Native Demo Project</Text>
       <View style={styles.buttonContainer}>
         <CustomButton
-          initialText="Go to Maps"
+          initialText="FAQ Page"
           updatedText="Loading..."
           onPress={handleSubmit}
         />

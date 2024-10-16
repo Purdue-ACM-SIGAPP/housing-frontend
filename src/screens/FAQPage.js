@@ -8,32 +8,32 @@ export default function FAQPage() {
 
   // Mock data for questions and answers
   const questions = [
-    "How do I leave a review?",
-    "How do I upload an image/video for a building?",
-    "Is off-campus housing also included in the app?",
-    "How do I make an account?",
-    "How do I report errors?",
-    "What is [Question 6]?",
+    "Q1",
+    "Q2",
+    // "Is off-campus housing also included in the app?",
+    // "How do I make an account?",
+    // "How do I report errors?",
+    // "What is [Question 6]?",
   ];
 
   const answers = [
-    "Answer 1: You can leave a review by...",
-    "Answer 2: To upload an image or video...",
-    "Answer 3: Yes, off-campus housing is...",
-    "Answer 4: To make an account, follow these steps...",
-    "Answer 5: Report errors by clicking on...",
-    "Answer 6: Here is how you can find more details about [Question 6]...",
+    "A1",
+    "A2",
+    // "Answer 3: Yes, off-campus housing is...",
+    // "Answer 4: To make an account, follow these steps...",
+    // "Answer 5: Report errors by clicking on...",
+    // "Answer 6: Here is how you can find more details about [Question 6]...",
   ];
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>FAQ Page</Text>
-      <View style={styles.buttonContainer}>
+      <View style={styles.dropdownContainer}>
         {questions.map((question, index) => (
           <DropdownBox
             key={index}
             question={question}
-            answer={answers[index]} // Link each answer with its respective question
+            answers={answers[index]} // Link each answer with its respective question
           />
         ))}
       </View>
@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  buttonContainer: {
+  dropdownContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 16, // Equivalent to mt-4
+    marginBottom: 10, // Equivalent to mt-4
   },
 });

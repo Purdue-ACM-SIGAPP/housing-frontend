@@ -90,7 +90,7 @@ export default function App() {
             />
             <Button title="Login" onPress={handleLogin} />
 
-            <Text style = {styles.input}>Not registered yet? </Text>
+            <Text>Not registered yet? </Text>
             <Button title="Create Account" onPress={handleCreate} />
 
         </View>

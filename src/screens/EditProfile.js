@@ -1,44 +1,93 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  ScrollView,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
+import Form from "../components/Form";
 
 export default function EditProfile() {
   return (
-    <View style={styles.container}>
-      {/* <Text style={styles.title}>Edit Profile</Text> */}
-      <View style={styles.waveContainer}></View>
-      <Image
-        style={styles.profilePic}
-        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-      />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardAvoidingView}
+      >
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <View style={styles.waveContainer}>
+            <Image
+              style={styles.waves}
+              source={require("../../assets/stacked-waves.png")}
+            />
+          </View>
+          <View style={styles.profilePicContainer}>
+            <Image
+              style={styles.profilePic}
+              src="https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg"
+            />
+            <View style={styles.uploadPhoto}>
+              <Image
+                style={styles.camera}
+                source={require("../../assets/camera.png")}
+              />
+            </View>
+          </View>
+          <Form />
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    // justifyContent: "center",
-    backgroundColor: "#F0FDF4", // Equivalent to bg-green-50
     width: "100%",
     height: "100%",
   },
-  title: {
-    fontSize: 24, // Equivalent to text-2xl
-    fontWeight: "bold",
-    textAlign: "center",
+  keyboardAvoidingView: { flex: 1 },
+  scrollView: {
+    flexGrow: 1,
+    alignItems: "center",
+    paddingBottom: 20,
   },
   waveContainer: {
     width: "100%",
-    height: "20%",
+    height: "25%",
     backgroundColor: "#38a169",
   },
+  waves: {
+    width: "100%",
+    height: "100%",
+  },
+  profilePicContainer: {
+    marginTop: -100, // Moves the profile pic up into the wave
+    alignItems: "center", // Centers the profile pic horizontally
+  },
   profilePic: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
+    width: 220,
+    height: 220,
+    borderRadius: 110,
+    borderColor: "#EEEEEE",
+    borderWidth: 2,
+  },
+  uploadPhoto: {
+    width: 60,
+    height: 60,
+    borderRadius: 35,
+    backgroundColor: "#CFB99185",
     position: "absolute",
-    top: 90,
+    right: 10,
+    bottom: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  camera: {
+    width: "50%",
+    height: "50%",
   },
 });

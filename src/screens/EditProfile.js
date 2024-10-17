@@ -1,8 +1,11 @@
-import * as React from "react";
+import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView, TextInput } from "react-native-web";
 
 export default function EditProfile() {
+  
+
   return (
     <View style={styles.container}>
       {/* <Text style={styles.title}>Edit Profile</Text> */}
@@ -11,6 +14,20 @@ export default function EditProfile() {
         style={styles.profilePic}
         src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
       />
+      <SafeAreaView>
+      <TextInput
+        style={styles.userSelect}
+        
+       
+      />
+      <TextInput
+        style={styles.userSelect}
+        
+        
+        placeholder="useless placeholder"
+        keyboardType="numeric"
+      />
+    </SafeAreaView>
     </View>
   );
 }
@@ -40,5 +57,16 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     position: "absolute",
     top: 90,
+  },
+  userSelect: {
+
+    width: "80%",
+    height: "5%",
+    backgroundColor: "white",
+    borderColor: "1D1D1D",
+    borderRadius: 10,
+    borderWidth: 1,
+    top: 350,
+    position: "absolute",
   },
 });

@@ -7,7 +7,7 @@ import {
   SafeAreaView,
 } from "react-native";
 
-export default function Form() {
+export default function Form() { 
   const [form, setForm] = React.useState({
     username: "",
     email: "",

@@ -2,6 +2,8 @@ import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../components/CustomButton";
+import LoginButton from "../components/LoginButton";
+import LogoutButton from "../components/LogoutButton";
 
 export default function HomePage() {
   const navigation = useNavigation();
@@ -20,6 +22,8 @@ export default function HomePage() {
           updatedText="Loading..."
           onPress={handleSubmit}
         />
+        <LoginButton />
+        <LogoutButton />
       </View>
     </View>
   );

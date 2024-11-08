@@ -1,6 +1,7 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Auth0Provider } from 'react-native-auth0';
 
 // Pages
 import HomePage from "./src/screens/HomePage";
@@ -12,6 +13,7 @@ export default function App() {
   const Stack = createStackNavigator();
 
   return (
+    <Auth0Provider domain={"dev-mkdb0weeluguzopu.us.auth0.com"} clientId={"hK1rmbutPjXvyj3ONvIspA22JnpjDOrk"}>
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Home"
@@ -25,5 +27,6 @@ export default function App() {
         <Stack.Screen name="NewsAndEventsPage" component={NewsAndEventsPage} />
       </Stack.Navigator>
     </NavigationContainer>
+    </Auth0Provider>
   );
 }

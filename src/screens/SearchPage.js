@@ -2,8 +2,9 @@ import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../components/CustomButton";
+import BottomNavbar from "../components/BottomNavbar";
 
-export default function HomePage() {
+export default function SearchPage() {
   const navigation = useNavigation();
 
   const handleSubmit = () => {
@@ -13,13 +14,16 @@ export default function HomePage() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>ASP.NET + React Native Demo Project</Text>
+      <Text style={styles.title}>Search Page</Text>
       <View style={styles.buttonContainer}>
         <CustomButton
           initialText="Go to Maps"
           updatedText="Loading..."
           onPress={handleSubmit}
         />
+      </View>
+      <View style={styles.navbarContainer}>
+        <BottomNavbar />
       </View>
     </View>
   );
@@ -43,5 +47,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 16, // Equivalent to mt-4
+  },
+  navbarContainer: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });

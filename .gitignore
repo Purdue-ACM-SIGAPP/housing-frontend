@@ -15,6 +15,7 @@ dist-ssr
 *.local
 wwwroot
 npm-debug.*
+ignore
 
 # Editor directories and files
 .vscode/*

@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 // Pages
 import HomePage from "./src/screens/HomePage";
 import NotFoundPage from "./src/screens/NotFoundPage";
-import MapPage from "./src/screens/MapPage";
+//import MapPage from "./src/screens/MapPage";
 import ReviewPage from "./src/screens/ReviewPage";
 import NewsAndEventsPage from "./src/screens/NewsAndEventsPage";
 import SearchPage from "./src/screens/SearchPage";
@@ -17,13 +17,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="ReviewPage" // set to ReviewPage to debug this branch, normally 'Home'
+        initialRouteName="ReviewPage" // set to ReviewPage to debug this branch, normally 'LogIn'
         screenOptions={{
           headerShown: true, // Set to false to hide header
         }}
       >
         <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="Map" component={MapPage} />
+        {/* <Stack.Screen name="Map" component={MapPage} /> */}
         <Stack.Screen name="NotFound" component={NotFoundPage} />
         <Stack.Screen name="Search" component={SearchPage} />
         <Stack.Screen name="NewsAndEventsPage" component={NewsAndEventsPage} />
@@ -31,6 +31,7 @@ export default function App() {
           name="IndividualNewsPage"
           component={IndividualNewsPage}
         />
+        <Stack.Screen name="ReviewPage" component={ReviewPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

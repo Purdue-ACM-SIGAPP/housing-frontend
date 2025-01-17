@@ -18,6 +18,12 @@ export default function SignupPage() {
   const navigation = useNavigation();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  
+  const accountTypesDummy = [
+    "student",
+    "faculty",
+    "martian",
+  ];
 
   const handleLogin = () => {
     if (username === "admin" && password === "password") {
@@ -61,6 +67,16 @@ export default function SignupPage() {
         value={email}
         onChangeText={setEmail}
       />
+      <View style={styles.dropdownContainer}>
+        {accountTypesDummy.map((accType, index) => (
+          <DropdownBox
+            key={index}
+            question={accType}
+            answers={answers[index]}
+          />
+        ))}
+      </View>
+
       <TouchableOpacity style={styles.loginButton} onPress={handleCreate}>
         <Text style={styles.buttonText}>Create Account</Text>
       </TouchableOpacity>

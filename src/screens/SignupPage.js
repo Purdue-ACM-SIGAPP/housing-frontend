@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginBottom: 24,
+    fontWeight: 600,
     color: "#020202",
   },
   input: {
@@ -95,15 +96,18 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 10,
+    marginTop: 10,
   },
   buttonText: {
     textAlign: "center",
+    fontWeight: 500,
   },
   image: {
     width: 100, // Set the width
     height: 100, // Set the height
     resizeMode: "cover", // 'cover', 'contain', etc.
-    marginTop: -50,
+    marginTop: -124,
+    marginBottom: 50,
   },
   row: {
     flexDirection: "row", // Puts text and button in a row

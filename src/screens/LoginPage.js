@@ -83,7 +83,7 @@ export default function LoginPage() {
         source={require("./purduepaths.png")} // Path to your image
         style={styles.image}
       />
-      <Text style={styles.title}>Login With Email or Phone Number</Text>
+      <Text style={styles.title}>Login</Text>
       <TouchableOpacity style={styles.emailButton} onPress={handleLoginEmail}>
         <Text style={styles.buttonText}>Login With Email</Text>
       </TouchableOpacity>
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginBottom: 24,
+    fontWeight: 600,
     color: "#020202",
   },
   input: {
@@ -136,9 +137,11 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 10,
+    marginBottom: 24,
   },
   buttonText: {
     textAlign: "center",
+    fontWeight: 500,
   },
   image: {
     width: 100, // Set the width

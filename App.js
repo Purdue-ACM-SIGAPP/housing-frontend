@@ -25,11 +25,11 @@ export default function App() {
           headerShown: true, // Set to false to hide header
         }}
       >
-        <Stack.Screen name="IntroPage" component={IntroPage} />
+        {/* <Stack.Screen name="IntroPage" component={IntroPage} />
         <Stack.Screen name="LogIn" component={LoginPage} />
         <Stack.Screen name="Verification" component={VerificationPage} />
-        <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="Signup" component={SignupPage} />
+        <Stack.Screen name="Home" component={HomePage} /> */}
+        {/* <Stack.Screen name="Signup" component={SignupPage} /> */}
         <Stack.Screen name="Map" component={MapPage} />
         <Stack.Screen name="NotFound" component={NotFoundPage} />
         <Stack.Screen name="Search" component={SearchPage} />

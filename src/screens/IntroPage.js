@@ -79,7 +79,7 @@ export default function IntroPage() {
 
       {/* Image */}
       <Image
-        source={require("./purduepaths.png")} // Path to your image
+        source={require("../../assets/purduepaths.png")} // Path to your image
         style={styles.image}
       />
 

@@ -59,37 +59,44 @@ const GoogleSignInButton = () => {
 //export default GoogleSignInButton;
 //end of button
 
-export default function IntroPage() {
+export default function LoginPage() {
   const navigation = useNavigation();
-  const handleLogin = () => {
-    navigation.navigate("LogIn");
+  //const [username, setUsername] = useState('');
+  //const [password, setPassword] = useState('');
+
+  const handleLoginEmail = () => {
+    Alert.alert("Waiting for verification...");
   };
 
-  const handleSignUp = () => {
-    navigation.navigate("signup");
+  const handleLoginPhone = () => {
+    console.log("Going to Verification Page...");
+    navigation.navigate("Verification");
+  };
+
+  const handleCreate = () => {
+    navigation.navigate("Signup");
   };
 
   return (
     <View style={styles.container}>
-      {/* Text Purdue Paths */}
-      <Text style={styles.titleText}>
-        <Text style={styles.Purdue}>Purdue</Text>
-        <Text style={styles.Paths}>Paths</Text>
-      </Text>
-
-      {/* Image */}
       <Image
         source={require("./purduepaths.png")} // Path to your image
         style={styles.image}
       />
+      <Text style={styles.title}>Login</Text>
+      <TouchableOpacity style={styles.emailButton} onPress={handleLoginEmail}>
+        <Text style={styles.buttonText}>Login With Email</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.phoneButton} onPress={handleLoginPhone}>
+        <Text style={styles.buttonText}>Login With Phone Number</Text>
+      </TouchableOpacity>
 
-      {/* Buttons */}
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.signButton} onPress={handleSignUp}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
+      <View style={styles.row}>
+        <Text style={styles.text}>Not registered yet?</Text>
+        <TouchableOpacity onPress={handleCreate}>
+          <Text style={styles.sameText}>Create an Account</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -102,46 +109,55 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 16,
   },
-  titleText: {
-    marginBottom: 80,
-    textAlign: "center",
+  title: {
+    fontSize: 24,
+    marginBottom: 24,
+    fontWeight: 600,
+    color: "#020202",
   },
-  Purdue: {
-    color: "#0c3f3f",
-    fontSize: 36,
-    fontWeight: "bold",
-  },
-  Paths: {
-    color: "#70c5c5",
-    fontSize: 36,
-    fontWeight: "bold",
-  },
-  image: {
-    width: 300,
-    height: 300,
-    resizeMode: "contain",
-    marginTop: 30,
-    marginBottom: 50,
-  },
-  loginButton: {
-    backgroundColor: "#ffffff",
+  input: {
     width: "80%",
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 10,
+    padding: 10,
     borderWidth: 1,
-    marginBottom: 15,
+    borderColor: "#020202",
+    marginBottom: 12,
+    borderRadius: 5,
   },
-  signButton: {
+  emailButton: {
     backgroundColor: "#d06c64",
     width: "80%",
     paddingVertical: 15,
-    borderColor: "#020202",
-    borderRadius: 10,
     paddingHorizontal: 30,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  phoneButton: {
+    backgroundColor: "#d06c64",
+    width: "80%",
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginBottom: 24,
   },
   buttonText: {
     textAlign: "center",
-    fontSize: 18,
+    fontWeight: 500,
+  },
+  image: {
+    width: 100, // Set the width
+    height: 100, // Set the height
+    resizeMode: "cover", // 'cover', 'contain', etc.
+    marginTop: -100,
+    marginBottom: 70,
+  },
+  row: {
+    flexDirection: "row", // Puts text and button in a row
+    alignItems: "center", // Vertically centers the text and button
+  },
+  text: {
+    marginRight: 5,
+  },
+  sameText: {
+    color: "blue",
   },
 });

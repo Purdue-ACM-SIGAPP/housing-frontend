@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, Pressable, StyleSheet, Image } from "react-native";
-import theme from "../utils/theme.js"
+import theme from "../utils/theme.js";
 
-const NewsPanel = ({ id, image, title, summary }) => {
+const NewsPanel = ({ id, image, title, summary, expandedPanelId, setExpandedPanelId }) => {
+  
+  // Determine if this panel is expanded
+  const isExpanded = expandedPanelId === id;
 
-  const [panelStyle, changeStyle] = useState(styles.panelCollapsed);
   const handlePress = () => {
     console.log("Pressed news item with id:", id);
-    console.log(panelStyle);
 
-    if (panelStyle == styles.panelCollapsed) {
-      changeStyle(styles.panelExpanded);
-    } else if (panelStyle == styles.panelExpanded) {
-      changeStyle(styles.panelCollapsed);
+    // Toggle expansion state
+    if (isExpanded) {
+      setExpandedPanelId(null);
+    } else {
+      setExpandedPanelId(id);
     }
   };
+
   return (
-    <Pressable style={panelStyle} onPress={handlePress}>
+    <Pressable style={isExpanded ? styles.panelExpanded : styles.panelCollapsed} onPress={handlePress}>
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.textSection}>
         <Text style={styles.title}>{title}</Text>
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   title: {
-    fontSize: theme.text.text, // Equivalent to text-2xl
+    fontSize: theme.text.text,
     fontWeight: "bold",
     color: theme.color.textLight,
     paddingBottom: 5,
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
   summary: {
     fontSize: theme.text.detail,
     color: theme.color.secondary,
-    overflow: "hidden",
+    overflow: "contain",
     height: "50%",
   },
   image: {

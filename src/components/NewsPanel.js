@@ -1,38 +1,41 @@
-import React from "react";
-import { View, Text, Pressable, StyleSheet, Image } from "react-native";
+import React, { useRef, useEffect } from "react";
+import { View, Text, Pressable, StyleSheet, Image, Animated } from "react-native";
 import theme from "../utils/theme.js";
 
 const NewsPanel = ({ id, image, title, summary, expandedPanelId, setExpandedPanelId }) => {
-  
-  // Determine if this panel is expanded
   const isExpanded = expandedPanelId === id;
 
-  const handlePress = () => {
-    console.log("Pressed news item with id:", id);
+  const animatedHeight = useRef(new Animated.Value(175)).current;
 
-    // Toggle expansion state
-    if (isExpanded) {
-      setExpandedPanelId(null);
-    } else {
-      setExpandedPanelId(id);
-    }
+  useEffect(() => {
+    Animated.timing(animatedHeight, {
+      toValue: isExpanded ? 400 : 175,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  }, [isExpanded]);
+
+  const handlePress = () => {
+    setExpandedPanelId(isExpanded ? null : id);
   };
 
   return (
-    <Pressable style={isExpanded ? styles.panelExpanded : styles.panelCollapsed} onPress={handlePress}>
-      <Image source={{ uri: image }} style={styles.image} />
-      <View style={styles.textSection}>
-        <Text style={styles.title}>{title}</Text>
-        <Text ellipsizeMode="tail" style={styles.summary}>
-          {summary}
-        </Text>
-      </View>
+    <Pressable onPress={handlePress}>
+      <Animated.View style={[styles.panel, { height: animatedHeight }]}>
+        <Image source={{ uri: image }} style={styles.image} />
+        <View style={styles.textSection}>
+          <Text style={styles.title}>{title}</Text>
+          <Text ellipsizeMode="tail" numberOfLines={isExpanded ? undefined : 3} style={styles.summary}>
+            {summary}
+          </Text>
+        </View>
+      </Animated.View>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  panelCollapsed: {
+  panel: {
     borderWidth: 5,
     borderColor: theme.color.secondary,
     backgroundColor: theme.color.primary,
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 0,
     borderRadius: theme.borderRadius,
-    height: 175,
+    overflow: "hidden",
   },
   textSection: {
     paddingTop: 10,
@@ -66,18 +69,6 @@ const styles = StyleSheet.create({
     objectFit: "cover",
     borderTopStartRadius: (3 * theme.borderRadius) / 4,
     borderTopRightRadius: (3 * theme.borderRadius) / 4,
-  },
-  panelExpanded: {
-    borderWidth: 5,
-    borderColor: theme.color.secondary,
-    backgroundColor: theme.color.primary,
-    paddingBottom: 20,
-    paddingHorizontal: 0,
-    width: "100%",
-    marginVertical: 10,
-    marginHorizontal: 0,
-    borderRadius: theme.borderRadius,
-    height: 400,
   },
 });
 

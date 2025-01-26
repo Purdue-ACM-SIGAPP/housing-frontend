@@ -20,7 +20,7 @@ const NewsPanel = ({ id, image, title, summary }) => {
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.textSection}>
         <Text style={styles.title}>{title}</Text>
-        <Text numberOfLines={2} ellipsizeMode="tail" style={styles.summary}>
+        <Text ellipsizeMode="tail" style={styles.summary}>
           {summary}
         </Text>
       </View>
@@ -54,6 +54,8 @@ const styles = StyleSheet.create({
   summary: {
     fontSize: theme.text.detail,
     color: theme.color.secondary,
+    overflow: "hidden",
+    height: "50%",
   },
   image: {
     width: "100%",
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 0,
     borderRadius: theme.borderRadius,
-    height: 275,
+    height: 400,
   },
 });
 

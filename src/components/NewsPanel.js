@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet, Image } from "react-native";
+import theme from "../utils/theme.js"
 
 const NewsPanel = ({ id, image, title, summary }) => {
+
+  const [panelStyle, changeStyle] = useState(styles.panelCollapsed);
   const handlePress = () => {
     console.log("Pressed news item with id:", id);
-  };
+    console.log(panelStyle);
 
+    if (panelStyle == styles.panelCollapsed) {
+      changeStyle(styles.panelExpanded);
+    } else if (panelStyle == styles.panelExpanded) {
+      changeStyle(styles.panelCollapsed);
+    }
+  };
   return (
-    <Pressable style={styles.panel} onPress={handlePress}>
+    <Pressable style={panelStyle} onPress={handlePress}>
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.textSection}>
         <Text style={styles.title}>{title}</Text>
@@ -20,16 +29,16 @@ const NewsPanel = ({ id, image, title, summary }) => {
 };
 
 const styles = StyleSheet.create({
-  panel: {
+  panelCollapsed: {
     borderWidth: 5,
-    borderColor: "#CDDDDE",
-    backgroundColor: "#065758",
-    paddingBottom: 10,
+    borderColor: theme.color.secondary,
+    backgroundColor: theme.color.primary,
+    paddingBottom: 20,
     paddingHorizontal: 0,
     width: "100%",
     marginVertical: 10,
     marginHorizontal: 0,
-    borderRadius: 15,
+    borderRadius: theme.borderRadius,
     height: 175,
   },
   textSection: {
@@ -37,21 +46,33 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   title: {
-    fontSize: 20, // Equivalent to text-2xl
+    fontSize: theme.text.text, // Equivalent to text-2xl
     fontWeight: "bold",
-    color: "#FFFFFF",
+    color: theme.color.textLight,
     paddingBottom: 5,
   },
   summary: {
-    fontSize: 12,
-    color: "#CDDDDE",
+    fontSize: theme.text.detail,
+    color: theme.color.secondary,
   },
   image: {
     width: "100%",
     height: "50%",
     objectFit: "cover",
-    borderTopStartRadius: 8,
-    borderTopRightRadius: 8,
+    borderTopStartRadius: (3 * theme.borderRadius) / 4,
+    borderTopRightRadius: (3 * theme.borderRadius) / 4,
+  },
+  panelExpanded: {
+    borderWidth: 5,
+    borderColor: theme.color.secondary,
+    backgroundColor: theme.color.primary,
+    paddingBottom: 20,
+    paddingHorizontal: 0,
+    width: "100%",
+    marginVertical: 10,
+    marginHorizontal: 0,
+    borderRadius: theme.borderRadius,
+    height: 275,
   },
 });
 

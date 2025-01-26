@@ -3,12 +3,12 @@ import { ScrollView, View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import NewsPanel from "../components/NewsPanel";
 import CustomButton from "../components/CustomButton";
+import theme from "../utils/theme.js"
 
 export default function NewsAndEventsPage() {
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
-    console.log("Going to Home Page...");
+  const handleVerify = () => {
     navigation.navigate("Home");
   };
 
@@ -48,8 +48,8 @@ export default function NewsAndEventsPage() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>
-          <Text style={{ color: "#CDDDDE" }}>Campus </Text>
-          <Text style={{ color: "#CFB991" }}>News and Events</Text>
+          <Text style={{ color: theme.color.secondary }}>Campus </Text>
+          <Text style={{ color: theme.color.boilermakerGold }}>News and Events</Text>
         </Text>
       </View>
       <ScrollView style={styles.contentBox}>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "top",
-    backgroundColor: "#FFFFFF", // Equivalent to bg-green-50
+    backgroundColor: theme.color.background, // Equivalent to bg-green-50
     width: "100%",
     height: "100%",
   },
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#065758",
+    backgroundColor: theme.color.primary,
   },
   buttonOverride: {
     flex: 1,

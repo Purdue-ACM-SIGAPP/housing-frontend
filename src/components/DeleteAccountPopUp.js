@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Animated, View, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Button, StyleSheet, Alert, Image, Touchable } from "react-native";
-import HomePage from "./HomePage";
+import HomePage from "../screens/HomePage.js";
 import theme from "../utils/theme.js"
 
 export default function DeleteAccountPopUp() {

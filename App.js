@@ -13,7 +13,6 @@ import IntroPage from "./src/screens/IntroPage";
 import LoginPage from "./src/screens/LoginPage";
 import VerificationPage from "./src/screens/VerificationPage";
 import SignupPage from "./src/screens/SignupPage";
-import DeleteAccountPopUp from "./src/screens/DeleteAccountPopUp";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -39,7 +38,6 @@ export default function App() {
           name="IndividualNewsPage"
           component={IndividualNewsPage}
         />
-        <Stack.Screen name="DeleteAccountPopUp" component={DeleteAccountPopUp} />
       </Stack.Navigator>
     </NavigationContainer>
   );

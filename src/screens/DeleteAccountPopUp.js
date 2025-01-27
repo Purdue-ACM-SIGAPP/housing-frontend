@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Animated, View, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Button, StyleSheet, Alert, Image, Touchable } from "react-native";
 import HomePage from "./HomePage";
+import theme from "../utils/theme.js"
 
 export default function DeleteAccountPopUp() {
   const navigation = useNavigation();
@@ -18,41 +19,32 @@ export default function DeleteAccountPopUp() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
 
-        <View style={styles.popUp}>
+      <View style={styles.popUp}>
 
-          <Text style={styles.text}>Are you sure?</Text>
+        <Text style={styles.text}>Are you sure?</Text>
 
-          <Text style={styles.subText}>Your account will be gone forever!</Text>
+        <Text style={styles.subText}>Your account will be gone forever!</Text>
 
-          <TouchableOpacity onPress={handleCancel} style={styles.cancelButtonContainer}>
-            <Text style={styles.cancelButtonText}>Cancel</Text>
-          </TouchableOpacity>
+        <TouchableOpacity onPress={handleCancel} style={styles.cancelButtonContainer}>
+          <Text style={styles.cancelButtonText}>Cancel</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity onPress={handleDelete} style={styles.deleteButtonContainer}>
-            <Text style={styles.deleteButtonText}>Delete</Text>
-          </TouchableOpacity>
-          
-        </View>
+        <TouchableOpacity onPress={handleDelete} style={styles.deleteButtonContainer}>
+          <Text style={styles.deleteButtonText}>Delete</Text>
+        </TouchableOpacity>
 
       </View>
+
     </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#99999999",
-    padding: 16,
-    justifyContent: "center",
-  },
   popUp: {
     width: 300,
     height: 500,
-    backgroundColor: "#fff",
+    backgroundColor: theme.color.background,
     borderRadius: 25,
     paddingVertical: 40,
     paddingHorizontal: 20,
@@ -62,55 +54,25 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 24,
-    color: "#000",
+    color: theme.color.text,
     marginBottom: 28,
     textAlign: "center",
-    textShadowColor: '#00000040',
+    textShadowColor: theme.color.shadow,
     textShadowOffset: { width: 0, height: 4 },
     textShadowRadius: 4,
   },
   subText: {
     fontSize: 20,
-    color: "#000",
+    color: theme.color.text,
     marginBottom: 28,
     textAlign: "center",
-    textShadowColor: '#00000040',
+    textShadowColor: theme.color.shadow,
     textShadowOffset: { width: 0, height: 4 },
     textShadowRadius: 4,
-  },
-  defaultMessage: {
-    fontSize: 16,
-    color: "#000",
-    marginBottom: 20,
-    textAlign: "center",
-    textShadowColor: '#00000040',
-    textShadowOffset: { width: 0, height: 4 },
-    textShadowRadius: 4,
-  },
-  resentMessage: {
-    fontSize: 16,
-    color: "#BF6E65",
-    marginBottom: 20,
-    textAlign: "center",
-    textShadowColor: '#00000040',
-    textShadowOffset: { width: 0, height: 4 },
-    textShadowRadius: 4,
-  },
-  input: {
-    height: 90,
-    borderColor: '#000',
-    color: "#555",
-    borderWidth: 1,
-    borderRadius: 25,
-    fontSize: 36,
-    letterSpacing: 25,
-    paddingLeft: '10%',
-    width: '85%',
-    marginBottom: 20,
   },
   cancelButtonContainer: {
-    backgroundColor: '#86A0AD',
-    color: "#fff",
+    backgroundColor: theme.color.primary,
+    color: theme.color.textLight,
     alignItems: "center",
     justifyContent: "center",
     width: 150,
@@ -119,14 +81,14 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   cancelButtonText: {
-    color: '#fff',
+    color: theme.color.textLight,
     fontSize: 20,
-    textShadowColor: '#00000040',
+    textShadowColor: theme.color.shadow,
     textShadowOffset: { width: 0, height: 4 },
     textShadowRadius: 4,
   },
   deleteButtonContainer: {
-    backgroundColor: '#BF6E65',
+    backgroundColor: theme.color.accent,
     alignItems: "center",
     justifyContent: "center",
     width: 150,
@@ -135,9 +97,9 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   deleteButtonText: {
-    color: '#fff',
+    color: theme.color.textLight,
     fontSize: 20,
-    textShadowColor: '#00000040',
+    textShadowColor: theme.color.shadow,
     textShadowOffset: { width: 0, height: 4 },
     textShadowRadius: 4,
   }

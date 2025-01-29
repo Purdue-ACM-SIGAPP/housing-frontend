@@ -57,7 +57,10 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
     },
     header: {
-        marginBottom: 16, // Adjust as needed
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 20,
     },
     title: {
         fontSize: 24,
@@ -78,15 +81,17 @@ const styles = StyleSheet.create({
         color: "#555",
     },
     mapButton: {
-        backgroundColor: "#007AFF", // Blue color
+        backgroundColor: '#065758',
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
     },
     mapButtonText: {
-        color: "#fff",
-        fontSize: 16,
-        fontWeight: "bold",
+        color: '#fff',
+        fontSize: 24,
+        textShadowColor: '#00000040',
+        textShadowOffset: { width: 0, height: 4 },
+        textShadowRadius: 4,
     },
 });
 

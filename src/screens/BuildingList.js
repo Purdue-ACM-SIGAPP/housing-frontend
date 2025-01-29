@@ -1,5 +1,6 @@
 import React from "react";
-import { SafeAreaView, Text, FlatList, StyleSheet, View, TouchableOpacity } from "react-native";
+import {SafeAreaView, Text, FlatList, StyleSheet, View, TouchableOpacity, Image, Dimensions, Alert} from "react-native";
+const { width, height } = Dimensions.get("window");
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -26,16 +27,26 @@ const BuildingList = () => {
         navigation.navigate("Map");
     };
 
+    const handleSortButtonPress = () => {
+        Alert.alert("./karthikeyan.png");
+    };
+
     return (
         <SafeAreaView style={styles.container}>
+            <Image
+                source={require("./listofbuildings.png")} // Path to your image
+                style={styles.image}
+            /><Image/>
             {/* Header with title and map button */}
             <View style={styles.header}>
-                <Text style={styles.title}>List of</Text>
-                <Text style={styles.title}>Buildings</Text>
+                <TouchableOpacity style={styles.sortButton} onPress={handleSortButtonPress}>
+                    <Text style={styles.mapButtonText}>Sort By</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.mapButton} onPress={handleMapButtonPress}>
                     <Text style={styles.mapButtonText}>Map</Text>
                 </TouchableOpacity>
             </View>
+            
 
             {/* List of buildings */}
             <FlatList
@@ -78,10 +89,21 @@ const styles = StyleSheet.create({
         color: "#555",
     },
     mapButton: {
-        backgroundColor: '#065758',
+        backgroundColor: "#065758", // Button color
         paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 25,
         borderRadius: 5,
+        alignSelf: "flex-end", // Align button to the right
+        marginRight: width * 0.05, // Add space on the right
+        marginTop: height * 0.015
+    },
+    sortButton: {
+        backgroundColor: "#065758", // Button color
+        paddingVertical: 10,
+        paddingHorizontal: 25,
+        borderRadius: 5,
+        marginLeft: width * 0.05,
+        marginTop: height * 0.015
     },
     mapButtonText: {
         color: '#fff',
@@ -89,6 +111,13 @@ const styles = StyleSheet.create({
         textShadowColor: '#00000040',
         textShadowOffset: { width: 0, height: 4 },
         textShadowRadius: 4,
+    },
+    image: {
+        width: width, 
+        height: height * 0.1, 
+        resizeMode: "cover",
+        alignItems: "center",
+        justifyContent: "center",
     },
 });
 

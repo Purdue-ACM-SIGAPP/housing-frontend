@@ -19,7 +19,10 @@ const BuildingList = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>Building List</Text>
+            <View style={styles.header}>
+                <Text style={styles.title}>List of</Text>
+                <Text style={styles.title}>Buildings</Text>
+            </View>
             <FlatList
                 data={buildings}
                 renderItem={renderBuilding}
@@ -34,6 +37,9 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: "#fff",
+    },
+    header: {
+        marginBottom: 16, // Adjust as needed
     },
     title: {
         fontSize: 24,

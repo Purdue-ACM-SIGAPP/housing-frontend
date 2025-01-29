@@ -1,7 +1,11 @@
 import React from "react";
-import { SafeAreaView, Text, FlatList, StyleSheet, View } from "react-native";
+import { SafeAreaView, Text, FlatList, StyleSheet, View, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 
 const BuildingList = () => {
+    const navigation = useNavigation();
+
     // Sample building data
     const buildings = [
         { id: "1", name: "Building A" },
@@ -17,9 +21,22 @@ const BuildingList = () => {
         </View>
     );
 
+    // Handle map button press
+    const handleMapButtonPress = () => {
+        navigation.navigate("Map");
+    };
+
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>Building List</Text>
+            {/* Header with title and map button */}
+            <View style={styles.header}>
+                <Text style={styles.title}>Building List</Text>
+                <TouchableOpacity style={styles.mapButton} onPress={handleMapButtonPress}>
+                    <Text style={styles.mapButtonText}>Map</Text>
+                </TouchableOpacity>
+            </View>
+
+            {/* List of buildings */}
             <FlatList
                 data={buildings}
                 renderItem={renderBuilding}
@@ -35,10 +52,15 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: "#fff",
     },
+    header: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 20,
+    },
     title: {
         fontSize: 24,
         fontWeight: "bold",
-        marginBottom: 20,
         color: "#333",
     },
     itemContainer: {
@@ -52,6 +74,17 @@ const styles = StyleSheet.create({
     itemText: {
         fontSize: 18,
         color: "#555",
+    },
+    mapButton: {
+        backgroundColor: "#007AFF", // Blue color
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+    },
+    mapButtonText: {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "bold",
     },
 });
 

@@ -28,13 +28,10 @@ const BuildingList = () => {
 
     return (
         <SafeAreaView style={styles.container}>
+            {/* Header with title and map button */}
             <View style={styles.header}>
                 <Text style={styles.title}>List of</Text>
                 <Text style={styles.title}>Buildings</Text>
-            </View>
-            {/* Header with title and map button */}
-            <View style={styles.header}>
-                <Text style={styles.title}>Building List</Text>
                 <TouchableOpacity style={styles.mapButton} onPress={handleMapButtonPress}>
                     <Text style={styles.mapButtonText}>Map</Text>
                 </TouchableOpacity>

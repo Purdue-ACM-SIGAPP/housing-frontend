@@ -9,9 +9,13 @@ const BuildingList = () => {
     // Sample building data
     const buildings = [
         { id: "1", name: "Purdue Memorial Union", directions: "Directions" },
-        { id: "2", name: "Building B", directions: "Directions" },
-        { id: "3", name: "Building C", directions: "Directions" },
-        { id: "4", name: "Building D", directions: "Directions" },
+        { id: "2", name: "Wilmeth Active Learning Center (WALC)", directions: "Directions" },
+        { id: "3", name: "University Book Store", directions: "Directions" },
+        { id: "4", name: "Lawson Computer Science Building", directions: "Directions" },
+        { id: "1", name: "Purdue Memorial Union", directions: "Directions" },
+        { id: "2", name: "Wilmeth Active Learning Center (WALC)", directions: "Directions" },
+        { id: "3", name: "University Book Store", directions: "Directions" },
+        { id: "4", name: "Lawson Computer Science Building", directions: "Directions" },
     ];
 
     // Handle building name press
@@ -27,7 +31,7 @@ const BuildingList = () => {
     // Render each building item
     const renderBuilding = ({ item }) => (
         <View style={styles.itemContainer}>
-            <Image source={require("./purduepaths.png")} style={styles.image} />
+            <Image source={require("./pmu.png")} style={styles.image} />
             <View style={styles.textContainer}>
                 <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
                     <Text style={styles.itemText}>{item.name}</Text>
@@ -142,7 +146,7 @@ const styles = StyleSheet.create({
     image: {
         width: 50,
         height: 50,
-        borderRadius: 25,
+        borderRadius: 5,
     },
 });
 

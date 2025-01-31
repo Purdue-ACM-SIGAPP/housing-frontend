@@ -8,10 +8,14 @@ const BuildingList = () => {
 
     // Sample building data
     const buildings = [
-        { id: "1", name: "Purdue Memorial Union", directions: "Directions", image: require("./pmu.png") },
-        { id: "2", name: "Wilmeth Active Learning Center", directions: "Directions", image: require("./walc.png") },
-        { id: "3", name: "University Book Store", directions: "Directions", image: require("./bookstore.png") },
-        { id: "4", name: "Lawson Computer Science Building", directions: "Directions", image: require("./lwsn.png") },
+        { id: "1", name: "Purdue Memorial Union", directions: "Directions", image: require("./pmu.png"),
+            description: "Lorem Ipsum Dolor sit amet" },
+        { id: "2", name: "Wilmeth Active Learning Center", directions: "Directions", image: require("./walc.png"),
+            description: "Lorem Ipsum Dolor sit amet" },
+        { id: "3", name: "University Book Store", directions: "Directions", image: require("./bookstore.png"),
+            description: "Lorem Ipsum Dolor sit amet" },
+        { id: "4", name: "Lawson Computer Science Building", directions: "Directions", image: require("./lwsn.png"),
+            description: "Lorem Ipsum Dolor sit amet" },
     ];
 
     // Handle building name press
@@ -29,11 +33,14 @@ const BuildingList = () => {
         <>
             <View style={styles.itemContainer}>
                 <View style={styles.topCont}>
-                    <Image source={require("./pmu.png")} style={styles.image} />
-                    <View style={styles.textContainer}>
-                        <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
-                            <Text style={styles.itemText}>{item.name}</Text>
-                        </TouchableOpacity>
+                    <Image source={item.image} style={styles.image} />
+                    <View style={styles.columnTop}>
+                        <View style={styles.textContainer}>
+                            <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
+                                <Text style={styles.itemText}>{item.name}</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={styles.descriptionText}>{item.description}</Text>
                     </View>
                 </View>
             </View>
@@ -154,7 +161,15 @@ const styles = StyleSheet.create({
     },
     topCont: {
         flexDirection: "row",
-    }
+    },
+    columnTop: {
+        flexDirection: "column",
+    },
+    descriptionText: {
+        fontSize: 12,
+        color: "#ffffff",
+        marginTop: 5,
+    },
 });
 
 export default BuildingList;

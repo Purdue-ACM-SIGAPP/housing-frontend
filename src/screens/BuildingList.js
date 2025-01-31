@@ -30,19 +30,25 @@ const BuildingList = () => {
 
     // Render each building item
     const renderBuilding = ({ item }) => (
-        <View style={styles.itemContainer}>
-            <Image source={require("./pmu.png")} style={styles.image} />
-            <View style={styles.textContainer}>
-                <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
-                    <Text style={styles.itemText}>{item.name}</Text>
-                </TouchableOpacity>
+        <>
+            <View style={styles.itemContainer}>
+                <View style={styles.topCont}>
+                    <Image source={require("./pmu.png")} style={styles.image} />
+                    <View style={styles.textContainer}>
+                        <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
+                            <Text style={styles.itemText}>{item.name}</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
-            <View style={styles.textContainer}>
-                <TouchableOpacity onPress={() => handleDirectionsPress(item.name)}>
-                    <Text style={styles.directionsText}>{item.directions}</Text>
-                </TouchableOpacity>
+            <View style={styles.itemContainer}>
+                <View style={styles.textContainer}>
+                    <TouchableOpacity onPress={() => handleDirectionsPress(item.name)}>
+                        <Text style={styles.directionsText}>{item.directions}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
+        </>
     );
 
     // Handle map button press
@@ -150,6 +156,9 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 5,
     },
+    topCont: {
+        flexDirection: "row",
+    }
 });
 
 export default BuildingList;

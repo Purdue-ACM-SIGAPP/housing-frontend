@@ -37,7 +37,7 @@ const BuildingList = () => {
                     </View>
                 </View>
             </View>
-            <View style={styles.itemContainer}>
+            <View style={[styles.itemContainer, styles.gold]}>
                 <View style={styles.textContainer}>
                     <TouchableOpacity onPress={() => handleDirectionsPress(item.name)}>
                         <Text style={styles.directionsText}>{item.directions}</Text>
@@ -154,6 +154,10 @@ const styles = StyleSheet.create({
     },
     topCont: {
         flexDirection: "row",
+    },
+    gold: {
+        backgroundColor: "#B59410",
+        textAlign: "center",
     }
 });
 

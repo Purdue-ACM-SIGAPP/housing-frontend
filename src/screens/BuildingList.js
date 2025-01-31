@@ -1,24 +1,41 @@
 import React from "react";
-import {SafeAreaView, Text, FlatList, StyleSheet, View, TouchableOpacity, Image, Dimensions, Alert} from "react-native";
+import { SafeAreaView, Text, FlatList, StyleSheet, View, TouchableOpacity, Image, Dimensions, Alert } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { useNavigation } from "@react-navigation/native";
-
 
 const BuildingList = () => {
     const navigation = useNavigation();
 
     // Sample building data
     const buildings = [
-        { id: "1", name: "Building A" },
-        { id: "2", name: "Building B" },
-        { id: "3", name: "Building C" },
-        { id: "4", name: "Building D" },
+        { id: "1", name: "Purdue Memorial Union", directions: "Directions" },
+        { id: "2", name: "Building B", directions: "Directions" },
+        { id: "3", name: "Building C", directions: "Directions" },
+        { id: "4", name: "Building D", directions: "Directions" },
     ];
+
+    // Handle building name press
+    const handleBuildingPress = (buildingName) => {
+        navigation.navigate("BuildingDetail", { buildingName });
+    };
+
+    // Handle directions press
+    const handleDirectionsPress = (buildingName) => {
+        navigation.navigate("Directions", { buildingName });
+    };
 
     // Render each building item
     const renderBuilding = ({ item }) => (
         <View style={styles.itemContainer}>
-            <Text style={styles.itemText}>{item.name}</Text>
+            <Image source={require("./purduepaths.png")} style={styles.image} />
+            <View style={styles.textContainer}>
+                <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
+                    <Text style={styles.itemText}>{item.name}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleDirectionsPress(item.name)}>
+                    <Text style={styles.directionsText}>{item.directions}</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 
@@ -28,15 +45,15 @@ const BuildingList = () => {
     };
 
     const handleSortButtonPress = () => {
-        Alert.alert("./karthikeyan.png");
+        Alert.alert("Sort By");
     };
 
     return (
         <SafeAreaView style={styles.container}>
             <Image
                 source={require("./listofbuildings.png")} // Path to your image
-                style={styles.image}
-            /><Image/>
+                style={styles.headerImage}
+            />
             {/* Header with title and map button */}
             <View style={styles.header}>
                 <TouchableOpacity style={styles.sortButton} onPress={handleSortButtonPress}>
@@ -46,7 +63,6 @@ const BuildingList = () => {
                     <Text style={styles.mapButtonText}>Map</Text>
                 </TouchableOpacity>
             </View>
-            
 
             {/* List of buildings */}
             <FlatList
@@ -70,40 +86,51 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 20,
     },
-    title: {
-        fontSize: 24,
-        fontWeight: "bold",
-        marginBottom: 20,
-        color: "#333",
+    headerImage: {
+        width: width,
+        height: height * 0.1,
+        resizeMode: "cover",
+        alignItems: "center",
+        justifyContent: "center",
     },
     itemContainer: {
+        flexDirection: "row",
         padding: 15,
         marginVertical: 8,
         backgroundColor: "#f4f4f4",
         borderRadius: 5,
         borderWidth: 1,
         borderColor: "#ddd",
+        alignItems: "center",
+    },
+    textContainer: {
+        marginLeft: 10,
     },
     itemText: {
         fontSize: 18,
         color: "#555",
     },
+    directionsText: {
+        fontSize: 16,
+        color: "#065758",
+        marginTop: 5,
+    },
     mapButton: {
-        backgroundColor: "#065758", // Button color
+        backgroundColor: "#065758",
         paddingVertical: 10,
         paddingHorizontal: 25,
         borderRadius: 5,
-        alignSelf: "flex-end", // Align button to the right
-        marginRight: width * 0.05, // Add space on the right
-        marginTop: height * 0.015
+        alignSelf: "flex-end",
+        marginRight: width * 0.05,
+        marginTop: height * 0.015,
     },
     sortButton: {
-        backgroundColor: "#065758", // Button color
+        backgroundColor: "#065758",
         paddingVertical: 10,
         paddingHorizontal: 25,
         borderRadius: 5,
         marginLeft: width * 0.05,
-        marginTop: height * 0.015
+        marginTop: height * 0.015,
     },
     mapButtonText: {
         color: '#fff',
@@ -113,11 +140,9 @@ const styles = StyleSheet.create({
         textShadowRadius: 4,
     },
     image: {
-        width: width, 
-        height: height * 0.1, 
-        resizeMode: "cover",
-        alignItems: "center",
-        justifyContent: "center",
+        width: 50,
+        height: 50,
+        borderRadius: 25,
     },
 });
 

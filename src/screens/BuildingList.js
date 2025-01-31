@@ -25,7 +25,7 @@ const BuildingList = () => {
 
     // Handle directions press
     const handleDirectionsPress = (buildingName) => {
-        navigation.navigate("Directions", { buildingName });
+        navigation.navigate("Map", { buildingName });
     };
 
     // Render each building item

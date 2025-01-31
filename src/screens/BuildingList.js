@@ -32,6 +32,8 @@ const BuildingList = () => {
                 <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
                     <Text style={styles.itemText}>{item.name}</Text>
                 </TouchableOpacity>
+            </View>
+            <View style={styles.textContainer}>
                 <TouchableOpacity onPress={() => handleDirectionsPress(item.name)}>
                     <Text style={styles.directionsText}>{item.directions}</Text>
                 </TouchableOpacity>
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     itemContainer: {
-        flexDirection: "row",
+        flexDirection: "column",
         padding: 15,
         marginVertical: 8,
         backgroundColor: "#f4f4f4",

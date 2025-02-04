@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import CustomMap from "../components/CustomMap";
 import BottomNavbar from "../components/BottomNavbar";
 import { API_BASE_URL } from "@env";
+import buildings from "../constants/buildings.json";
 
 export default function MapPage() {
   const [markerPosition, setMarkerPosition] = useState({
@@ -14,27 +15,9 @@ export default function MapPage() {
 
   const fetchBuildings = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/Building/`, {
-        method: "GET",
-      });
-
-      // Check if the response is successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`Failed to fetch buildings: ${response.statusText}`);
-      }
-
-      const buildings = await response.json().catch((error) => {
-        console.error("Error parsing JSON:", error);
-        return null; // Return null if JSON parsing fails
-      });
-
-      if (!buildings) {
-        console.error("Failed to parse buildings JSON:", response);
-        return;
-      }
 
       // If there are no buildings, log and return early
-      if (!buildings || buildings.length === 0) {
+      if (!buildings.list || buildings.list.length === 0) {
         console.warn("No buildings found");
         Alert.alert("No buildings found");
         return;
@@ -42,30 +25,10 @@ export default function MapPage() {
 
       // For each building, fetch the outline
       const outlines = await Promise.all(
-        buildings.map(async (building) => {
+        buildings.list.map( (building) => {
           try {
-            const outlineResponse = await fetch(
-              `${API_BASE_URL}/api/Building/outline?id=${building.id}&radius=0.0001`
-            );
 
-            const outlineData = await outlineResponse.json();
-
-            if (!outlineData || outlineData.length === 0) {
-              console.warn(`No outline data found for building ${building.id}`);
-              return null; // Skip this building if no outline data is found
-            }
-
-            // Assuming outlineData is an array with one object containing `coordinates`
-            const buildingOutline = outlineData[0]; // Get the first object
-            if (!buildingOutline || !buildingOutline.coordinates) {
-              console.warn(
-                `Invalid outline structure for building ${building.id}`
-              );
-              return null;
-            }
-
-            // Extract the coordinates from the structure (assuming { latitude, longitude })
-            const coordinates = buildingOutline.coordinates.map((coord) => ({
+            const coordinates = building.coordinates.map((coord) => ({
               latitude: coord.latitude, // If the object contains `latitude` and `longitude`
               longitude: coord.longitude,
             }));
@@ -127,11 +90,11 @@ export default function MapPage() {
           <View>
             <Text style={styles.buildingName}>{buildingData.id}</Text>
             <Text style={styles.buildingAddress}>Coordinates:</Text>
-            {/* {buildingData.coordinates.map((coord, index) => (
+            {buildingData.coordinates.map((coord, index) => (
               <Text key={index} style={styles.coordinateText}>
                 Lat: {coord.latitude}, Lng: {coord.longitude}
               </Text>
-            ))} */}
+            ))}
           </View>
         </View>
       )}

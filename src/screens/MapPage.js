@@ -24,8 +24,7 @@ export default function MapPage() {
       }
 
       // For each building, fetch the outline
-      const outlines = await Promise.all(
-        buildings.list.map( (building) => {
+      const outlines = buildings.list.map( (building) => {
           try {
 
             const coordinates = building.coordinates.map((coord) => ({
@@ -45,7 +44,6 @@ export default function MapPage() {
             return null;
           }
         })
-      );
 
       const validOutlines = outlines.filter((outline) => outline !== null);
 
@@ -90,11 +88,11 @@ export default function MapPage() {
           <View>
             <Text style={styles.buildingName}>{buildingData.id}</Text>
             <Text style={styles.buildingAddress}>Coordinates:</Text>
-            {buildingData.coordinates.map((coord, index) => (
+            {/* {buildingData.coordinates.map((coord, index) => (
               <Text key={index} style={styles.coordinateText}>
                 Lat: {coord.latitude}, Lng: {coord.longitude}
               </Text>
-            ))}
+            ))} */}
           </View>
         </View>
       )}

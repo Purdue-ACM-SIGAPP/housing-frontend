@@ -117,6 +117,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#ddd",
         alignItems: "center",
+        justifyContent: "space-between",
+        margin: 20,
     },
     textContainer: {
         marginLeft: 10,

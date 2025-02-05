@@ -2,6 +2,8 @@ import React from "react";
 import { SafeAreaView, Text, FlatList, StyleSheet, View, TouchableOpacity, Image, Dimensions, Alert } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { useNavigation } from "@react-navigation/native";
+import BottomNavbar from "../components/BottomNavbar";
+
 
 const BuildingList = () => {
     const navigation = useNavigation();
@@ -65,6 +67,9 @@ const BuildingList = () => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.circle1} />
+            <View style={styles.circle2} />
+            <View style={styles.circle3} />
             <Image
                 source={require("./listofbuildings.png")} // Path to your image
                 style={styles.headerImage}
@@ -85,6 +90,7 @@ const BuildingList = () => {
                 renderItem={renderBuilding}
                 keyExtractor={(item) => item.id}
             />
+            <BottomNavbar />
         </SafeAreaView>
     );
 };
@@ -128,8 +134,8 @@ const styles = StyleSheet.create({
         color: "#ffffff",
     },
     directionsText: {
-        fontSize: 20, // Increase the size
-        fontWeight: "bold", // Makes the text bold
+        fontSize: 20, 
+        fontWeight: "bold", 
         color: "#ffffff",
         marginTop: 5,
     },
@@ -180,7 +186,34 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: "#ffffff",
         marginTop: 5,
-    }
+    },
+    circle1: {
+        position: "absolute",
+        width: 420,
+        height: 420,
+        borderRadius: 420 / 2,
+        backgroundColor: "#A5C2C480",
+        left: -124,
+        top: 543,
+    },
+    circle2: {
+        position: "absolute",
+        width: 300,
+        height: 300,
+        borderRadius: 300 / 2,
+        backgroundColor: "#A5C2C480",
+        left: 194,
+        top: -158,
+    },
+    circle3: {
+        position: "absolute",
+        width: 300,
+        height: 300,
+        borderRadius: 300 / 2,
+        backgroundColor: "#A5C2C480",
+        left: 185,
+        top: 665,
+    },
 });
 
 export default BuildingList;

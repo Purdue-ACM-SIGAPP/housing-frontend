@@ -8,13 +8,13 @@ const BuildingList = () => {
 
     // Sample building data
     const buildings = [
-        { id: "1", name: "Purdue Memorial Union", directions: "Directions", image: require("./pmu.png"),
+        { id: "1", name: "Purdue Memorial Union", directions: "Directions \u{1F4CD}", image: require("./pmu.png"),
             description: "Lorem Ipsum Dolor sit amet" },
-        { id: "2", name: "Wilmeth Active Learning Center", directions: "Directions", image: require("./walc.png"),
+        { id: "2", name: "Wilmeth Active Learning Center", directions: "Directions \u{1F4CD}", image: require("./walc.png"),
             description: "Lorem Ipsum Dolor sit amet" },
-        { id: "3", name: "University Book Store", directions: "Directions", image: require("./bookstore.png"),
+        { id: "3", name: "University Book Store", directions: "Directions \u{1F4CD}", image: require("./bookstore.png"),
             description: "Lorem Ipsum Dolor sit amet" },
-        { id: "4", name: "Lawson Computer Science Building", directions: "Directions", image: require("./lwsn.png"),
+        { id: "4", name: "Lawson Computer Science Building", directions: "Directions \u{1F4CD}", image: require("./lwsn.png"),
             description: "Lorem Ipsum Dolor sit amet" },
     ];
 
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     itemContainer: {
         flexDirection: "column",
         padding: 15,
-        marginVertical: 8,
+        marginVertical: 4,
         backgroundColor: "#065758",
         borderRadius: 5,
         borderWidth: 1,
@@ -168,9 +168,10 @@ const styles = StyleSheet.create({
     gold: {
         backgroundColor: "#cbba96",
         textAlign: "center",
-        paddingVertical: 5,
+        paddingVertical: 3,
         paddingHorizontal: 25,
-        marginHorizontal: 15, // Adds space on both left and right
+        margin: 20,
+        marginBottom: 10,
     },
     columnTop: {
         flexDirection: "column",

@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#ddd",
         alignItems: "center",
+        marginHorizontal: 15,
     },
     textContainer: {
         marginLeft: 10,
@@ -126,7 +127,8 @@ const styles = StyleSheet.create({
         color: "#ffffff",
     },
     directionsText: {
-        fontSize: 16,
+        fontSize: 20, // Increase the size
+        fontWeight: "bold", // Makes the text bold
         color: "#ffffff",
         marginTop: 5,
     },
@@ -163,8 +165,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     gold: {
-        backgroundColor: "#B59410",
+        backgroundColor: "#cbba96",
         textAlign: "center",
+        paddingVertical: 5,
+        paddingHorizontal: 25,
+        marginHorizontal: 15, // Adds space on both left and right
     },
     columnTop: {
         flexDirection: "column",

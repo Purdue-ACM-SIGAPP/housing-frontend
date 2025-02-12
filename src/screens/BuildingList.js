@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 5,
+        marginRight: 10
     },
     topCont: {
         flexDirection: "row",

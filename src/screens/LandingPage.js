@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useCustomAuth } from "../providers/CustomAuthProvider";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -12,10 +13,17 @@ import {
 } from "react-native";
 //export default GoogleSignInButton;
 
-
-
 export default function IntroPage() {
+  const { user, expoGoLogin, expoGoLogout, isExpoGo, setUser } = useCustomAuth();
   const navigation = useNavigation();
+
+  // Redirect user to HomePage after login
+  useEffect(() => {
+    if (user) {
+      navigation.replace("HomePage"); // Navigates to HomePage
+    }
+  }, [user, navigation]);
+
   const handleLogin = () => {
     navigation.navigate("LogIn");
   };

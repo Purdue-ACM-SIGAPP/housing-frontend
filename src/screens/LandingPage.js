@@ -24,13 +24,13 @@ export default function IntroPage() {
     }
   }, [user, navigation]);
 
-  const handleLogin = () => {
-    navigation.navigate("LogIn");
-  };
+  // const handleLogin = () => {
+  //   navigation.navigate("LogIn");
+  // };
 
-  const handleSignUp = () => {
-    navigation.navigate("signup");
-  };
+  // const handleSignUp = () => {
+  //   navigation.navigate("signup");
+  // };
 
   return (
     <View style={styles.container}>
@@ -53,12 +53,22 @@ export default function IntroPage() {
       {/* Buttons */}
       {/* place two buttons side by side */}
       <View style={styles.ButtonSpace}>
-        <TouchableOpacity style={styles.signButton} onPress={handleSignUp}>
+          {user ? (
+            <View style={styles.navButtons}>
+              <Text style={styles.title}>Redirecting...</Text>
+              <ActivityIndicator size="large" color="#007BFF" />
+            </View>
+          ) : isExpoGo ? (
+            <Button title="Log in" onPress={expoGoLogin} />
+          ) : (
+            <LoginButton setUser={setUser} />
+          )}
+        {/* <TouchableOpacity style={styles.signButton} onPress={handleSignUp}>
           <Text style={styles.signText}>Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         
       </View>
     </View>

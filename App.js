@@ -31,7 +31,12 @@ export default function App() {
           name="IndividualNewsPage"
           component={IndividualNewsPage}
         />
-        <Stack.Screen name="ReviewPage" component={ReviewPage} />
+        <Stack.Screen name="ReviewPage" component={
+          () => <ReviewPage
+            bldgName="Cool Building"
+            bldgDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,  "
+            imgUrl="https://collections.lib.purdue.edu/campus/images/buildings/11-amelia-earhart-residence-hall.jpeg"
+            ></ReviewPage>} />
       </Stack.Navigator>
     </NavigationContainer>
   );

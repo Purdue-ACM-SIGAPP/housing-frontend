@@ -10,32 +10,49 @@ const BuildingList = () => {
 
     // Sample building data
     const buildings = [
-        { id: "1", name: "Purdue Memorial Union", directions: "Directions \u{1F4CD}", image: require("./pmu.png"),
-            description: "Lorem Ipsum Dolor sit amet" },
-        { id: "2", name: "Wilmeth Active Learning Center", directions: "Directions \u{1F4CD}", image: require("./walc.png"),
-            description: "Lorem Ipsum Dolor sit amet" },
-        { id: "3", name: "University Book Store", directions: "Directions \u{1F4CD}", image: require("./bookstore.png"),
-            description: "Lorem Ipsum Dolor sit amet" },
-        { id: "4", name: "Lawson Computer Science Building", directions: "Directions \u{1F4CD}", image: require("./lwsn.png"),
-            description: "Lorem Ipsum Dolor sit amet" },
+        {
+            id: "1", name: "Purdue Memorial Union", directions: "Directions \u{1F4CD}", image: require("./pmu.png"),
+            description: "Lorem Ipsum Dolor sit amet"
+        },
+        {
+            id: "2",
+            name: "Wilmeth Active Learning Center",
+            directions: "Directions \u{1F4CD}",
+            image: require("./walc.png"),
+            description: "Lorem Ipsum Dolor sit amet"
+        },
+        {
+            id: "3",
+            name: "University Book Store",
+            directions: "Directions \u{1F4CD}",
+            image: require("./bookstore.png"),
+            description: "Lorem Ipsum Dolor sit amet"
+        },
+        {
+            id: "4",
+            name: "Lawson Computer Science Building",
+            directions: "Directions \u{1F4CD}",
+            image: require("./lwsn.png"),
+            description: "Lorem Ipsum Dolor sit amet"
+        },
     ];
 
     // Handle building name press
     const handleBuildingPress = (buildingName) => {
-        navigation.navigate("BuildingDetail", { buildingName });
+        navigation.navigate("BuildingDetail", {buildingName});
     };
 
     // Handle directions press
     const handleDirectionsPress = (buildingName) => {
-        navigation.navigate("Map", { buildingName });
+        navigation.navigate("Map", {buildingName});
     };
 
     // Render each building item
-    const renderBuilding = ({ item }) => (
+    const renderBuilding = ({item}) => (
         <>
             <View style={styles.itemContainer}>
                 <View style={styles.topCont}>
-                    <Image source={item.image} style={styles.image} />
+                    <Image source={item.image} style={styles.image}/>
                     <View style={styles.columnTop}>
                         <View style={styles.textContainer}>
                             <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
@@ -66,15 +83,17 @@ const BuildingList = () => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.circle1} />
-            <View style={styles.circle2} />
-            <View style={styles.circle3} />
+        <SafeAreaView style={{flex: 1}}>
+            {/* Circles (if needed) */}
+            <View style={styles.circle1}/>
+            <View style={styles.circle2}/>
+            <View style={styles.circle3}/>
+
+            {/* Header */}
             <Image
-                source={require("./listofbuildings.png")} // Path to your image
+                source={require("./listofbuildings.png")}
                 style={styles.headerImage}
             />
-            {/* Header with title and map button */}
             <View style={styles.header}>
                 <TouchableOpacity style={styles.sortButton} onPress={handleSortButtonPress}>
                     <Text style={styles.mapButtonText}>Sort By</Text>
@@ -84,22 +103,35 @@ const BuildingList = () => {
                 </TouchableOpacity>
             </View>
 
-            {/* List of buildings */}
-            <FlatList
-                data={buildings}
-                renderItem={renderBuilding}
-                keyExtractor={(item) => item.id}
-            />
-            <BottomNavbar />
+            {/* FlatList with padding to avoid overlapping */}
+            <View style={{flex: 1}}>
+                <FlatList
+                    data={buildings}
+                    renderItem={renderBuilding}
+                    keyExtractor={(item) => item.id}
+                    contentContainerStyle={{paddingBottom: 80}} // Add padding for BottomNavbar
+                />
+            </View>
+
+            {/* BottomNavbar positioned at the bottom */}
+            <View style={styles.bottomNavbarContainer}>
+                <BottomNavbar/>
+            </View>
         </SafeAreaView>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
         backgroundColor: "#fff",
+    },
+    bottomNavbarContainer: {
+        position: "absolute", 
+        bottom: -9, 
+        left: 0,
+        right: 0,
     },
     header: {
         flexDirection: "row",
@@ -196,6 +228,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#A5C2C480",
         left: -124,
         top: 543,
+        zIndex: -1, // Render below other components
+        pointerEvents: "none", // Make non-interactive
     },
     circle2: {
         position: "absolute",
@@ -205,6 +239,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#A5C2C480",
         left: 194,
         top: -158,
+        zIndex: -1, // Render below other components
+        pointerEvents: "none", // Make non-interactive
     },
     circle3: {
         position: "absolute",
@@ -214,6 +250,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#A5C2C480",
         left: 185,
         top: 665,
+        zIndex: -1, // Render below other components
+        pointerEvents: "none", // Make non-interactive
     },
 });
 

@@ -18,6 +18,7 @@ const theme = {
         text: 24,
         subtext: 20,
         input: 24,
+        detail: 18,
     },
     borderRadius: 25,
 };

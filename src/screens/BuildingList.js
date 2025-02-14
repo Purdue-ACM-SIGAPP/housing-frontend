@@ -11,12 +11,12 @@ const BuildingList = () => {
     // Sample building data
     const buildings = [
         {
-            id: "1", name: "Purdue Memorial Union", directions: "Directions \u{1F4CD}", image: require("./pmu.png"),
+            id: "1", name: "Purdue Memorial Union (PMU)", directions: "Directions \u{1F4CD}", image: require("./pmu.png"),
             description: "Lorem Ipsum Dolor sit amet"
         },
         {
             id: "2",
-            name: "Wilmeth Active Learning Center",
+            name: "Wilmeth Active Learning Center (WALC)",
             directions: "Directions \u{1F4CD}",
             image: require("./walc.png"),
             description: "Lorem Ipsum Dolor sit amet"
@@ -50,25 +50,27 @@ const BuildingList = () => {
     // Render each building item
     const renderBuilding = ({item}) => (
         <>
-            <View style={styles.itemContainer}>
-                <View style={styles.topCont}>
+            <View style={styles.topCont}>
+                <View style={styles.imageContainer}>
                     <Image source={item.image} style={styles.image}/>
-                    <View style={styles.columnTop}>
-                        <View style={styles.textContainer}>
-                            <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
-                                <Text style={styles.itemText}>{item.name}</Text>
-                            </TouchableOpacity>
+                </View>
+                <View style={styles.itemContainer}>
+                    <View style={styles.topCont}>
+                        <View style={styles.columnTop}>
+                            <View style={styles.textContainer}>
+                                <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
+                                    <Text style={styles.itemText}>{item.name}</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <Text style={styles.descriptionText}>{item.description}</Text>
                         </View>
-                        <Text style={styles.descriptionText}>{item.description}</Text>
                     </View>
                 </View>
             </View>
-            <View style={[styles.itemContainer, styles.gold]}>
-                <View style={styles.textContainer}>
-                    <TouchableOpacity onPress={() => handleDirectionsPress(item.name)}>
-                        <Text style={styles.directionsText}>{item.directions}</Text>
-                    </TouchableOpacity>
-                </View>
+            <View style={[styles.directionsContainer, styles.gold]}>
+                <TouchableOpacity onPress={() => handleDirectionsPress(item.name)}>
+                    <Text style={styles.directionsText}>{item.directions}</Text>
+                </TouchableOpacity>
             </View>
         </>
     );
@@ -146,24 +148,52 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    imageContainer: {
+        flexDirection: "column",
+        padding: 7,
+        marginVertical: 4,
+        backgroundColor: "#065758",
+        borderRadius: 15,
+        borderWidth: 1,
+        borderColor: "#0c3f3f",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginLeft: 20,
+        marginRight: 10,
+    },
     itemContainer: {
         flexDirection: "column",
         padding: 15,
         marginVertical: 4,
-        backgroundColor: "#065758",
-        borderRadius: 5,
+        backgroundColor: "#0c3f3f",
+        borderRadius: 15,
+        borderWidth: 1,
+        borderColor: "#ddd",
+        //alignItems: "center",
+        justifyContent: "space-between",
+        width: 250,
+    },
+    directionsContainer: {
+        flexDirection: "column",
+        padding: 15,
+        marginVertical: 4,
+        backgroundColor: "#0c3f3f",
+        borderRadius: 15,
         borderWidth: 1,
         borderColor: "#ddd",
         alignItems: "center",
         justifyContent: "space-between",
-        margin: 20,
+        width: width * 0.931,
     },
     textContainer: {
         marginLeft: 10,
     },
     itemText: {
-        fontSize: 18,
+        fontSize: 15,
         color: "#ffffff",
+        fontWeight: "bold",
+        textAlign: "left",
+        marginLeft: -15,
     },
     directionsText: {
         fontSize: 20, 
@@ -196,10 +226,9 @@ const styles = StyleSheet.create({
         textShadowRadius: 4,
     },
     image: {
-        width: 50,
-        height: 50,
+        width: 100,
+        height: 100,
         borderRadius: 5,
-        marginRight: 10
     },
     topCont: {
         flexDirection: "row",
@@ -218,6 +247,9 @@ const styles = StyleSheet.create({
     descriptionText: {
         fontSize: 12,
         color: "#ffffff",
+        fontWeight: "lighter",
+        textAlign: "left",
+        marginLeft: -5,
         marginTop: 5,
     },
     circle1: {

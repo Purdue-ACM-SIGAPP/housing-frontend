@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import SearchPanel from "../components/SearchPanel";
 import CustomMap from "../components/CustomMap";
 import BottomNavbar from "../components/BottomNavbar";
 import { API_BASE_URL } from "@env";
@@ -109,6 +110,7 @@ export default function MapPage() {
 
   return (
     <View style={styles.container}>
+      <SearchPanel />
       <CustomMap
         markerPosition={markerPosition}
         onMapPress={(coordinate) => setMarkerPosition(coordinate)} // Simply update marker position

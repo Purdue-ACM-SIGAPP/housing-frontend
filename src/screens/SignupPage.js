@@ -45,7 +45,7 @@ export default function SignupPage() {
   return (
     <View style={styles.container}>
       <Image
-        source={require("./purduepaths.png")} // Path to your image
+        source={require("../../assets/purduepaths.png")} // Path to your image
         style={styles.image}
       />
       <Text style={styles.title}>Sign Up</Text>

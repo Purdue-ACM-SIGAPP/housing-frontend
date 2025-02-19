@@ -13,6 +13,7 @@ import IntroPage from "./src/screens/IntroPage";
 import LoginPage from "./src/screens/LoginPage";
 import VerificationPage from "./src/screens/VerificationPage";
 import SignupPage from "./src/screens/SignupPage";
+import BuildingList from "./src/screens/BuildingList";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -34,6 +35,7 @@ export default function App() {
         <Stack.Screen name="NotFound" component={NotFoundPage} />
         <Stack.Screen name="Search" component={SearchPage} />
         <Stack.Screen name="NewsAndEventsPage" component={NewsAndEventsPage} />
+          <Stack.Screen name="BuildingList" component={BuildingList} />
         <Stack.Screen
           name="IndividualNewsPage"
           component={IndividualNewsPage}

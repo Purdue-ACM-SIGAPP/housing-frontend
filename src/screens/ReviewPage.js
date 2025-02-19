@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { Alert, Image, Switch, View, Text, StyleSheet, TextInput, FlatList } from "react-native";
 import BottomNavbar from "../components/BottomNavbar";
+import ReviewPanel from "../components/ReviewPanel";
 export default function ReviewPage(props) {
   const bldgName = props.bldgName;
   const bldgDesc = props.bldgDesc;
   const imgUrl = props.imgUrl;
-  const [imgAltTxt, setImgAltTxt] = useState("No Image Description");
-  const [phrases, setPhrases] = useState([ { id: '1', txt: 'test1' }, { id: '2', txt: 'test2' }, { id: '3', txt: 'test3' }, ]);
-  const arrPhrases = [ { id: '1', title: 'test1' }, { id: '2', title: 'test2' }, { id: '3', title: 'test3' }, ];
-  const [reviewText, setReviewText] = useState('');
-  const [isAnonymous, setIsAnonymous] = useState(true);
-  const [starBoxes, setStarBoxes] = useState([true, true, true, true, true]);
+  const imgAltTxt = props.imgAltTxt;
+
+  const reviewTitle = "Terrible Building Terrible Building Terrible Building Terrible Building Terrible Building";
+  const reviewText = "Worst building i have seen in my life!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+  const reviewRating = 4;
+  const isAnonymous = false;
 
   const handleSubmitForm = () => {
     if (!reviewText) {
@@ -29,7 +30,6 @@ export default function ReviewPage(props) {
       </View>
       <View style={styles.checkView}>
         <View style={styles.reviewStars}>
-          <Text>Placeholder</Text> {/* Delete later */}
           {/* Switch or maybe Pressable for stars, use mapping with index to access star in array */}
         </View>
           {/* five star shaped checkboxes, FORM boolean array field (above)
@@ -40,24 +40,14 @@ export default function ReviewPage(props) {
         <Text style={styles.bldgDesc}>{bldgDesc}</Text>
         {/* link to full description (info about building page link?) */}
       </View>
-      <View style={styles.keywrdView}>
-        <Text style={styles.keywrdHead}>Associated Phrases</Text>
-        { arrPhrases != null ?
-          <View style={styles.phraseList}>
-            <Text>Placeholder</Text> {/* Delete later */}
-            {/* <FlatList data={arrPhrases} keyExtractor={(phrase) => phrase.id}
-              renderItem={({ item }) => <Text style={styles.phrase}>{item.title}</Text>} /> */}
-          </View> : <View><Text style={styles.loadingPhrases}>Loading Keywords...</Text></View>
-        }
-        {/* link to all reviews? */}
-      </View>
+      <ReviewPanel title={reviewTitle} text={reviewText} rating={reviewRating} pfp={imgUrl} />
       <View style={styles.writeView}>
-        <TextInput style={styles.reviewTextInput} value={reviewText} onChangeText={setReviewText}
+        <TextInput style={styles.reviewTextInput}
           placeholder="Enter a written review..." /> {/* FORM text field */}
       </View>
       <View style={styles.anonView}>
         <Text style={styles.anonMsg}>Anonymous?</Text> {/* left side of view */}
-        <Switch style={styles.anonBox} value={isAnonymous} onValueChange={setIsAnonymous} />
+        <Switch style={styles.anonBox} value={isAnonymous}/>
         {/* check box on right side (above), FORM boolean field */}
       </View>
     </View>

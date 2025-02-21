@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { SafeAreaView, Text, FlatList, StyleSheet, View, TouchableOpacity, Image, Dimensions, Alert } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { useNavigation } from "@react-navigation/native";
@@ -8,37 +8,51 @@ import BottomNavbar from "../components/BottomNavbar";
 const BuildingList = () => {
     const navigation = useNavigation();
 
+    const [buildingData, setBuildingData] = useState(null);
     // Sample building data
-    const buildings = [
-        {
-            id: "1", name: "Purdue Memorial Union (PMU)", directions: "Directions \u{1F4CD}", image: require("./pmu.png"),
-            description: "Lorem Ipsum Dolor sit amet"
-        },
-        {
-            id: "2",
-            name: "Wilmeth Active Learning Center (WALC)",
-            directions: "Directions \u{1F4CD}",
-            image: require("./walc.png"),
-            description: "Lorem Ipsum Dolor sit amet"
-        },
-        {
-            id: "3",
-            name: "University Book Store",
-            directions: "Directions \u{1F4CD}",
-            image: require("./bookstore.png"),
-            description: "Lorem Ipsum Dolor sit amet"
-        },
-        {
-            id: "4",
-            name: "Lawson Computer Science Building",
-            directions: "Directions \u{1F4CD}",
-            image: require("./lwsn.png"),
-            description: "Lorem Ipsum Dolor sit amet"
-        },
-    ];
+
+    const fetchBuildings = async () => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/Building/`, {
+                method: "GET",
+            });
+
+            // Check if the response is successful (status code 200)
+            if (!response.ok) {
+                throw new Error(`Failed to fetch buildings: ${response.statusText}`);
+            }
+
+            const buildings = await response.json().catch((error) => {
+                console.error("Error parsing JSON:", error);
+                return null; // Return null if JSON parsing fails
+            });
+
+            if (!buildings) {
+                console.error("Failed to parse buildings JSON:", response);
+                return;
+            }
+
+            // If there are no buildings, log and return early
+            if (!buildings || buildings.length === 0) {
+                console.warn("No buildings found");
+                Alert.alert("No buildings found");
+                return;
+            }
+            
+            
+        } catch (error) {
+            console.error("Error fetching building data:", error);
+        }
+    };
+    
+
+    useEffect(() => {
+        fetchBuildings();
+    }, []);
 
     // Handle building name press
     const handleBuildingPress = (buildingName) => {
+        setBuildingData(building); // Set building data on polygon press
         navigation.navigate("BuildingDetail", {buildingName});
     };
 
@@ -62,7 +76,7 @@ const BuildingList = () => {
                                     <Text style={styles.itemText}>{item.name}</Text>
                                 </TouchableOpacity>
                             </View>
-                            <Text style={styles.descriptionText}>{item.description}</Text>
+                            <Text style={styles.descriptionText}>{item.address}</Text>
                         </View>
                     </View>
                 </View>
@@ -108,7 +122,7 @@ const BuildingList = () => {
             {/* FlatList with padding to avoid overlapping */}
             <View style={{flex: 1}}>
                 <FlatList
-                    data={buildings}
+                    data={buildingData}
                     renderItem={renderBuilding}
                     keyExtractor={(item) => item.id}
                     contentContainerStyle={{paddingBottom: 80}} // Add padding for BottomNavbar

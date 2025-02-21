@@ -7,12 +7,14 @@ import { fetchDevAccessToken } from "../../services/authApi";
 const AuthContext = createContext();
 
 const CustomAuthProvider = ({ children }) => {
-  const isExpoGo = Constants.executionEnvironment === "storeClient";
+  const isExpoGo = true;
   const [user, setUser] = useState(null);
 
   const expoGoLogin = async () => {
     if (isExpoGo) {
       const _token = await fetchDevAccessToken();
+      // Alert.alert(_token);
+      console.warn(_token);
       if (_token === undefined) return;
 
       const { access_token, token_type } = _token;

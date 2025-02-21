@@ -64,8 +64,21 @@ export default function LoginPage() {
   //const [username, setUsername] = useState('');
   //const [password, setPassword] = useState('');
 
-  const handleLoginEmail = () => {
+  const handleLoginEmail = async () => {
     Alert.alert("Waiting for verification...");
+
+    const response = await fetch("https://dev-2gowyyl3kin685ua.us.auth0.com/authorize", {
+      method: "GET",
+    });
+    
+    // body: JSON.stringify({ username: "test2@gmail.com", password: "x>9?Q!dC#p~3r}%" }),
+    
+    console.log(response.json());
+
+    if (response.status == 200) {
+      navigation.navigate("HomePage");
+    }
+
   };
 
   const handleLoginPhone = () => {

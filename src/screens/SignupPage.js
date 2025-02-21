@@ -38,7 +38,7 @@ export default function SignupPage() {
     } else {
       console.log(username + ": " + email);
 
-      navigation.navigate("LogIn");
+      navigation.navigate("LandingPage");
     }
   };
 

@@ -62,7 +62,7 @@ const GoogleSignInButton = () => {
 export default function IntroPage() {
   const navigation = useNavigation();
   const handleLogin = () => {
-    navigation.navigate("LogIn");
+    navigation.navigate("LandingPage");
   };
 
   const handleSignUp = () => {

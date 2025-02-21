@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCustomAuth } from "../providers/CustomAuthProvider";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -20,17 +20,9 @@ export default function IntroPage() {
   // Redirect user to HomePage after login
   useEffect(() => {
     if (user) {
-      navigation.replace("HomePage"); // Navigates to HomePage
+      navigation.replace("Home"); // Navigates to HomePage
     }
   }, [user, navigation]);
-
-  // const handleLogin = () => {
-  //   navigation.navigate("LogIn");
-  // };
-
-  // const handleSignUp = () => {
-  //   navigation.navigate("signup");
-  // };
 
   return (
     <View style={styles.container}>
@@ -46,30 +38,27 @@ export default function IntroPage() {
 
       {/* Image */}
       <Image
-        source={require("./purduepaths.png")} // Path to your image
+        source={require("./purduepaths.png")}
         style={styles.image}
       />
 
       {/* Buttons */}
-      {/* place two buttons side by side */}
       <View style={styles.ButtonSpace}>
-          {user ? (
-            <View style={styles.navButtons}>
-              <Text style={styles.title}>Redirecting...</Text>
-              <ActivityIndicator size="large" color="#007BFF" />
-            </View>
-          ) : isExpoGo ? (
-            <Button title="Log in" onPress={expoGoLogin} />
-          ) : (
-            <LoginButton setUser={setUser} />
-          )}
-        {/* <TouchableOpacity style={styles.signButton} onPress={handleSignUp}>
+        <TouchableOpacity style={styles.signButton}>
           <Text style={styles.signText}>Sign Up</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity> */}
-        
+        {user ? (
+          <View style={styles.navButtons}>
+            <Text style={styles.title}>Redirecting...</Text>
+            {/* <ActivityIndicator size="large" color="#007BFF" /> */}
+          </View>
+        ) : isExpoGo ? (
+          <TouchableOpacity style={styles.loginButton} onPress={expoGoLogin}>
+            <Text style={styles.loginText}>Log in</Text>
+           </TouchableOpacity>
+        ) : (
+          <LoginButton setUser={setUser} />
+        )}
       </View>
     </View>
   );

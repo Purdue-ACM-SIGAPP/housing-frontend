@@ -3,6 +3,8 @@ import { SafeAreaView, Text, FlatList, StyleSheet, View, TouchableOpacity, Image
 const { width, height } = Dimensions.get("window");
 import { useNavigation } from "@react-navigation/native";
 import BottomNavbar from "../components/BottomNavbar";
+import { API_BASE_URL } from "@env";
+
 
 
 const BuildingList = () => {

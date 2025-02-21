@@ -2,6 +2,7 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+
 // Pages
 import HomePage from "./src/screens/HomePage";
 import NotFoundPage from "./src/screens/NotFoundPage";
@@ -21,7 +22,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="LogIn"
+        initialRouteName="BuildingList"
         screenOptions={{
           headerShown: true, // Set to false to hide header
         }}

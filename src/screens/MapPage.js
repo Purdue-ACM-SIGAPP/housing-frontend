@@ -26,14 +26,13 @@ export default function MapPage() {
       // For each building, fetch the outline
       const outlines = buildings.list.map( (building) => {
           try {
-
             const coordinates = building.coordinates.map((coord) => ({
-              latitude: coord.latitude, // If the object contains `latitude` and `longitude`
+              latitude: coord.latitude,
               longitude: coord.longitude,
             }));
 
             return {
-              id: building.id,
+              buildingID: building.buildingID,
               coordinates: coordinates,
             };
           } catch (error) {
@@ -60,8 +59,16 @@ export default function MapPage() {
     fetchBuildings();
   }, []);
 
-  const handleBuildingPress = (building) => {
+  const handleBuildingPress = async (building) => {
     setBuildingData(building); // Set building data on polygon press
+    console.log("Building Pressed:", typeof(building.buildingID));
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/Building/${building.buildingID}`);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching building data:", error);
+    }
   };
 
   const handleClosePopup = () => {

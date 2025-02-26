@@ -34,40 +34,37 @@ const ReviewForm = () => {
   };
 
   return (
-    <Pressable onPress={handlePress}>
-      <Animated.View style={[styles.panel, { height: animatedHeight }]}>
-        <Image source={{ uri: image }} style={styles.image} />
-        <View style={styles.textSection}>
-          <Text style={styles.title}>{title}</Text>
-          <Text ellipsizeMode="tail" numberOfLines={isExpanded ? undefined : 3} style={styles.summary}>
-            {summary}
-          </Text>
-        </View>
-      </Animated.View>
-    </Pressable>
-  );
-};
-    <View style={styles.container}>
-      <Image
-        source={require("../../assets/purduepaths.png")} // Path to your image
-        style={styles.image}
-      />
-      <Text style={styles.title}>Write Review</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Write a title for your review"
-        value={reviewTitle}
-        onChangeText={setReviewTitle}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Write your review"
-        value={review}
-        onChangeText={setReview}
-      />
-      
-
-      
+    <View>
+      <Pressable onPress={handlePress}>
+        <Animated.View style={[styles.panel, { height: animatedHeight }]}>
+          <Image source={{ uri: image }} style={styles.image} />
+          <View style={styles.textSection}>
+            <Text style={styles.title}>{title}</Text>
+            <Text ellipsizeMode="tail" numberOfLines={isExpanded ? undefined : 3} style={styles.summary}>
+              {summary}
+            </Text>
+          </View>
+        </Animated.View>
+      </Pressable>
+      <View style={styles.container}>
+        <Image
+          source={require("../../assets/purduepaths.png")} // Path to your image
+          style={styles.image}
+        />
+        <Text style={styles.title}>Write Review</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Write a title for your review"
+          value={reviewTitle}
+          onChangeText={setReviewTitle}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Write your review"
+          value={review}
+          onChangeText={setReview}
+        />
+      </View>
     </View>
   );
 }

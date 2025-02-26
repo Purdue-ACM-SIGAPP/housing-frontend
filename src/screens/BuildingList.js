@@ -9,6 +9,10 @@ import { API_BASE_URL } from "@env";
 
 const BuildingList = () => {
     const navigation = useNavigation();
+    const [markerPosition, setMarkerPosition] = useState({
+        latitude: 40.424925486930064,
+        longitude: -86.91358246116509,
+    });
 
     const [buildingData, setBuildingData] = useState(null);
     // Sample building data
@@ -40,8 +44,8 @@ const BuildingList = () => {
                 Alert.alert("No buildings found");
                 return;
             }
-            
-            
+
+            setBuildingData(buildings);
         } catch (error) {
             console.error("Error fetching building data:", error);
         }
@@ -59,23 +63,30 @@ const BuildingList = () => {
     };
 
     // Handle directions press
-    const handleDirectionsPress = (buildingName) => {
-        navigation.navigate("Map", {buildingName});
+    const handleDirectionsPress = (building) => {
+        const longitude = building.longitude;
+        const latitude = building.latitude;
+        setMarkerPosition(latitude, longitude)
+        navigation.navigate("Map", {
+            initialLatitude: latitude,
+            initialLongitude: longitude,
+        });
     };
+
 
     // Render each building item
     const renderBuilding = ({item}) => (
         <>
             <View style={styles.topCont}>
                 <View style={styles.imageContainer}>
-                    <Image source={item.image} style={styles.image}/>
-                </View>
+                    <Image source={'/Users/wmali1/RiderProjects/housing-frontend/src/screens/pmu.png'} style={styles.image}/>
+                </View> 
                 <View style={styles.itemContainer}>
                     <View style={styles.topCont}>
                         <View style={styles.columnTop}>
                             <View style={styles.textContainer}>
                                 <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
-                                    <Text style={styles.itemText}>{item.name}</Text>
+                                    <Text style={styles.itemText}>{item.name + " (" + item.acronym + ")"}</Text>
                                 </TouchableOpacity>
                             </View>
                             <Text style={styles.descriptionText}>{item.address}</Text>
@@ -84,8 +95,8 @@ const BuildingList = () => {
                 </View>
             </View>
             <View style={[styles.directionsContainer, styles.gold]}>
-                <TouchableOpacity onPress={() => handleDirectionsPress(item.name)}>
-                    <Text style={styles.directionsText}>{item.directions}</Text>
+                <TouchableOpacity onPress={() => handleDirectionsPress(item)}>
+                    <Text style={styles.directionsText}>{"Directions 📍"}</Text>
                 </TouchableOpacity>
             </View>
         </>
@@ -125,6 +136,7 @@ const BuildingList = () => {
             <View style={{flex: 1}}>
                 <FlatList
                     data={buildingData}
+                    markerPostition={markerPosition}
                     renderItem={renderBuilding}
                     keyExtractor={(item) => item.id}
                     contentContainerStyle={{paddingBottom: 80}} // Add padding for BottomNavbar

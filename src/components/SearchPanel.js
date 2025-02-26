@@ -1,58 +1,116 @@
 // BottomNavbar.js
 import React from "react";
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TextInput, Image, FlatList, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from "react-native";
 import theme from "../utils/theme.js"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const SearchPanel = () => {
+    const [text, onChangeText] = React.useState("");
+    const [searchResults, setSearchResults] = React.useState([]);
+
+    const fetchSearchResults = async () => {
+        console.log(text);
+        try {
+            const response = await fetch(`http://10.186.75.221:5128/api/Building?query=` + text, {
+                method: "GET",
+            });
+
+            // Check if the response is successful (status code 200)
+            if (!response.ok) {
+                throw new Error(`Failed to fetch search results: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            // console.log("Fetched data:", data);
+            setSearchResults(data);
+        } catch (error) {
+            console.error("Error fetching search results:", error);
+        }
+    };
+
+    const handleSelectItem = (item) => {
+        console.log(item);
+        onChangeText(item.name);
+        setSearchResults([]);
+        Keyboard.dismiss();
+    }
+
+    const dismissDropdown = () => {
+        setSearchResults([]);
+        Keyboard.dismiss();
+    };
+
     return (
-        <View style={styles.searchPanel}>
-            <View style={styles.searchBarContainer}>
-                <TouchableOpacity style={styles.questionButton}>
-                    <Icon name="help" size={36} color="#065758" />
-                </TouchableOpacity>
+        <TouchableWithoutFeedback onPress={dismissDropdown} accessible={false}>
+            <View style={styles.searchPanel}>
+                <View style={styles.searchBarContainer}>
+                    <TouchableOpacity style={styles.questionButton}>
+                        <Icon name="help" size={36} color="#065758" />
+                    </TouchableOpacity>
 
-                <TextInput
-                    style={styles.searchBar}
-                    placeholder="Building Name...">
-                </TextInput>
+                    <TextInput
+                        style={styles.searchBar}
+                        onChangeText={onChangeText}
+                        placeholder="Building Name..."
+                        onSubmitEditing={fetchSearchResults}>
+                    </TextInput>
 
-                <TouchableOpacity style={styles.searchButton}><Icon name="magnify" size={40} color="#065758" /></TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={fetchSearchResults}
+                        style={styles.searchButton}
+                    >
+                        <Icon name="magnify" size={40} color="#065758" />
+                    </TouchableOpacity>
 
-                <TouchableOpacity><Image source={{ uri: "https://static2.bigstockphoto.com/1/1/3/large1500/311375767.jpg" }} style={styles.profilePicture} /></TouchableOpacity>
-            </View>
+                    <TouchableOpacity><Image source={{ uri: "https://static2.bigstockphoto.com/1/1/3/large1500/311375767.jpg" }} style={styles.profilePicture} /></TouchableOpacity>
 
-            <View style={styles.moreFilters}><TouchableOpacity style={{ position: "absolute" }}><Text style={styles.moreFiltersText}>More search filters...</Text></TouchableOpacity></View>
+                    {searchResults.length > 0 && (
+                        <View style={styles.dropdown}>
+                            <FlatList
+                                data={searchResults}
+                                keyExtractor={(item) => item.id.toString()}
+                                renderItem={({ item }) => (
+                                    <TouchableOpacity style={styles.dropdownItem} onPress={() => handleSelectItem(item)}>
+                                        <Text>{item.name}</Text>
+                                    </TouchableOpacity>
+                                )}
+                            />
+                        </View>
+                    )}
+                </View>
 
-            <View style={styles.filterButtonContainer}>
-                <TouchableOpacity style={styles.filterButton}>
-                    <Text style={styles.filterButtonText}>JButton</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.filterButton}>
-                    <Text style={styles.filterButtonText}>JButton</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.filterButton}>
-                    <Text style={styles.filterButtonText}>JButton</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.filterButton}>
-                    <Text style={styles.filterButtonText}>JButton</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.filterButtonContainer}>
-                <TouchableOpacity style={styles.filterButton}>
-                    <Text style={styles.filterButtonText}>JButton</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.filterButton}>
-                    <Text style={styles.filterButtonText}>JButton</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.filterButton}>
-                    <Text style={styles.filterButtonText}>JButton</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.filterButton}>
-                    <Text style={styles.filterButtonText}>JButton</Text>
-                </TouchableOpacity>
-            </View>
-        </View >
+                <View style={styles.moreFilters}><TouchableOpacity style={{ position: "absolute" }}><Text style={styles.moreFiltersText}>More search filters...</Text></TouchableOpacity></View>
+
+                <View style={styles.filterButtonContainer}>
+                    <TouchableOpacity style={styles.filterButton}>
+                        <Text style={styles.filterButtonText}>JButton</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.filterButton}>
+                        <Text style={styles.filterButtonText}>JButton</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.filterButton}>
+                        <Text style={styles.filterButtonText}>JButton</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.filterButton}>
+                        <Text style={styles.filterButtonText}>JButton</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.filterButtonContainer}>
+                    <TouchableOpacity style={styles.filterButton}>
+                        <Text style={styles.filterButtonText}>JButton</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.filterButton}>
+                        <Text style={styles.filterButtonText}>JButton</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.filterButton}>
+                        <Text style={styles.filterButtonText}>JButton</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.filterButton}>
+                        <Text style={styles.filterButtonText}>JButton</Text>
+                    </TouchableOpacity>
+                </View>
+            </View >
+        </TouchableWithoutFeedback>
     );
 };
 
@@ -138,6 +196,26 @@ const styles = StyleSheet.create({
     },
     filterButtonText: {
         color: "#fff",
+    },
+    dropdown: {
+        width: "65%",
+        backgroundColor: "white",
+        position: "absolute",
+        top: 50,
+        zIndex: 200,
+        borderRadius: 5,
+        maxHeight: 150,
+        overflow: "hidden",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    dropdownItem: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
     }
 });
 

@@ -4,10 +4,10 @@ import CustomMap from "../components/CustomMap";
 import BottomNavbar from "../components/BottomNavbar";
 import { API_BASE_URL } from "@env";
 
-export default function MapPage() {
+export default function MapPage({ initialLatitude, initialLongitude }) {
   const [markerPosition, setMarkerPosition] = useState({
-    latitude: 40.424925486930064,
-    longitude: -86.91358246116509,
+    latitude: initialLatitude || 40.424925486930064,
+    longitude: initialLongitude || -86.91358246116509,
   });
   const [buildingData, setBuildingData] = useState(null);
   const [highlightedBuildings, setHighlightedBuildings] = useState([]);
@@ -51,7 +51,7 @@ export default function MapPage() {
             const outlineData = await outlineResponse.json();
 
             if (!outlineData || outlineData.length === 0) {
-              console.warn(`No outline data found for building ${building.id}`);
+              //console.warn(`No outline data found for building ${building.id}`);
               return null; // Skip this building if no outline data is found
             }
 

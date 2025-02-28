@@ -21,7 +21,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="BuildingList"
         screenOptions={{
           headerShown: true, // Set to false to hide header
         }}
@@ -35,7 +35,7 @@ export default function App() {
         <Stack.Screen name="NotFound" component={NotFoundPage} />
         <Stack.Screen name="Search" component={SearchPage} />
         <Stack.Screen name="NewsAndEventsPage" component={NewsAndEventsPage} />
-          <Stack.Screen name="BuildingList" component={BuildingList} />
+        <Stack.Screen name="BuildingList" component={BuildingList} />
         <Stack.Screen
           name="IndividualNewsPage"
           component={IndividualNewsPage}

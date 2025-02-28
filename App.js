@@ -13,6 +13,7 @@ import IntroPage from "./src/screens/IntroPage";
 import LoginPage from "./src/screens/LoginPage";
 import VerificationPage from "./src/screens/VerificationPage";
 import SignupPage from "./src/screens/SignupPage";
+import WriteReview from "./src/components/writeReview";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -20,11 +21,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="LogIn"
+        initialRouteName="WriteReview"
         screenOptions={{
           headerShown: true, // Set to false to hide header
         }}
       >
+        <Stack.Screen name="WriteReview" component={WriteReview} />
         <Stack.Screen name="IntroPage" component={IntroPage} />
         <Stack.Screen name="LogIn" component={LoginPage} />
         <Stack.Screen name="Verification" component={VerificationPage} />

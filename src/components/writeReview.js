@@ -1,73 +1,61 @@
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
+import { 
+  View, 
+  Text, 
+  Image, 
+  TextInput, 
+  Button, 
+  StyleSheet 
 } from "react-native";
 
 const ReviewForm = () => {
+  const [reviewTitle, setReviewTitle] = useState("");
+  const [building, setBuilding] = useState("");
+  const [review, setReview] = useState("");
 
-  const [reviewTitle, setReviewTitle] = useState('');
-  const [building, setBuilding] = useState('');
-  const [review, setReview] = useState('');
-  const handleChange = (setter) => (event) => {
-    setter(event.target.value);
-  };
+  const handleSubmit = () => {
+    console.log("Submitting Review:");
+    console.log("Review Title:", reviewTitle);
+    console.log("Building:", building);
+    console.log("Review:", review);
 
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Submitting Review:');
-    console.log('Review Title:', reviewTitle);
-    console.log('Building:', building);
-    console.log('Review:', review);
- 
-    setReviewTitle('');
-    setBuilding('');
-    setReview('');
+    setReviewTitle("");
+    setBuilding("");
+    setReview("");
   };
 
   return (
-    <View>
-      <Pressable onPress={handlePress}>
-        <Animated.View style={[styles.panel, { height: animatedHeight }]}>
-          <Image source={{ uri: image }} style={styles.image} />
-          <View style={styles.textSection}>
-            <Text style={styles.title}>{title}</Text>
-            <Text ellipsizeMode="tail" numberOfLines={isExpanded ? undefined : 3} style={styles.summary}>
-              {summary}
-            </Text>
-          </View>
-        </Animated.View>
-      </Pressable>
-      <View style={styles.container}>
-        <Image
-          source={require("../../assets/purduepaths.png")} // Path to your image
-          style={styles.image}
-        />
-        <Text style={styles.title}>Write Review</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Write a title for your review"
-          value={reviewTitle}
-          onChangeText={setReviewTitle}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Write your review"
-          value={review}
-          onChangeText={setReview}
-        />
-      </View>
+    <View style={styles.container}>
+      <Image 
+        source={require("../../assets/purduepaths.png")} 
+        style={styles.image} 
+      />
+      <Text style={styles.title}>Write Review</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Review Title"
+        value={reviewTitle}
+        onChangeText={setReviewTitle}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Building Name"
+        value={building}
+        onChangeText={setBuilding}
+      />
+      <TextInput
+        style={[styles.input, styles.textArea]}
+        placeholder="Write your review"
+        value={review}
+        onChangeText={setReview}
+        multiline
+      />
+
+      <Button title="Submit Review" onPress={handleSubmit} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -77,11 +65,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 16,
   },
+  image: {
+    width: 100,
+    height: 100,
+    marginBottom: 16,
+  },
   title: {
     fontSize: 24,
-    marginBottom: 24,
-    fontWeight: 600,
+    fontWeight: "bold",
     color: "#020202",
+    marginBottom: 16,
   },
   input: {
     width: "80%",
@@ -91,5 +84,10 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderRadius: 5,
   },
-
+  textArea: {
+    height: 100,
+    textAlignVertical: "top",
+  },
 });
+
+export default ReviewForm;

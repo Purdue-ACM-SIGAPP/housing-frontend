@@ -1,16 +1,19 @@
-import * as React from "react";
-import { ScrollView, View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import NewsPanel from "../components/NewsPanel";
 import CustomButton from "../components/CustomButton";
+import theme from "../utils/theme.js"
 
 export default function NewsAndEventsPage() {
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
-    console.log("Going to Home Page...");
+  const handleVerify = () => {
     navigation.navigate("Home");
   };
+
+  // State to track which panel is expanded
+  const [expandedPanelId, setExpandedPanelId] = useState(null);
 
   const events = [
     {
@@ -45,25 +48,29 @@ export default function NewsAndEventsPage() {
   ];
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>
-          <Text style={{ color: "#CDDDDE" }}>Campus </Text>
-          <Text style={{ color: "#CFB991" }}>News and Events</Text>
-        </Text>
+    <TouchableWithoutFeedback onPress={handleVerify} accessible={false}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.title}>
+            <Text style={{ color: theme.color.secondary }}>Campus </Text>
+            <Text style={{ color: theme.color.boilermakerGold }}>News and Events</Text>
+          </Text>
+        </View>
+        <ScrollView style={styles.contentBox}>
+          {events.map((event) => (
+            <NewsPanel
+              key={event.id}
+              id={event.id}
+              title={event.title}
+              summary={event.summary}
+              image={event.image}
+              expandedPanelId={expandedPanelId} // Pass down current expanded panel ID
+              setExpandedPanelId={setExpandedPanelId} // Pass down state updater
+            ></NewsPanel>
+          ))}
+        </ScrollView>
       </View>
-      <ScrollView style={styles.contentBox}>
-        {events.map((event) => (
-          <NewsPanel
-            key={event.id}
-            id={event.id}
-            title={event.title}
-            summary={event.summary}
-            image={event.image}
-          ></NewsPanel>
-        ))}
-      </ScrollView>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "top",
-    backgroundColor: "#FFFFFF", // Equivalent to bg-green-50
+    backgroundColor: theme.color.background, // Equivalent to bg-green-50
     width: "100%",
     height: "100%",
   },
@@ -81,7 +88,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#065758",
+    backgroundColor: theme.color.primary,
   },
   buttonOverride: {
     flex: 1,

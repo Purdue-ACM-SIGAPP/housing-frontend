@@ -133,7 +133,7 @@ const BuildingList = () => {
             </View>
 
             {/* FlatList with padding to avoid overlapping */}
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, marginLeft: -5}}>
                 <FlatList
                     data={buildingData}
                     markerPostition={markerPosition}

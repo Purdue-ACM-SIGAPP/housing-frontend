@@ -66,7 +66,7 @@ const BuildingList = () => {
     const handleDirectionsPress = (building) => {
         const longitude = building.longitude;
         const latitude = building.latitude;
-        setMarkerPosition(latitude, longitude)
+        setMarkerPosition({latitude, longitude});
         navigation.navigate("Map", {
             initialLatitude: latitude,
             initialLongitude: longitude,

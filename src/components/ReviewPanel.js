@@ -38,9 +38,8 @@ const ReviewPanel = ({title, text, rating, pfp}) => {
                         setOverflows(true);
                     }
                 }} numberOfLines={isExpanded ? 20 : TEXT_LENGTH}style={styles.text}>{text}</Text>
-                {overflows ? <Text style={styles.text} onPress={() => {
+                {overflows ? <Text style={styles.showMore} onPress={() => {
                     setIsExpanded(!isExpanded);
-                    console.log("hi")
                 }}>{isExpanded ? "Show less" : "Show more"}</Text> : null}
             </View>
         </View>
@@ -53,6 +52,7 @@ const styles = StyleSheet.create({
         width: "80%",
         borderRadius: 15,
         minHeight: 250,
+        paddingBottom: 10
     },
 
     topContainer: {
@@ -82,6 +82,11 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 12,
         color: "#CDDDDE",
+    },
+    showMore: {
+        color: "#CDDDDE",
+        fontSize: 12,
+        textDecorationLine: "underline",
     },
     pfp: {
         borderRadius: 50,

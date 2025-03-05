@@ -5,11 +5,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 // Pages
 import HomePage from "./src/screens/HomePage";
 import NotFoundPage from "./src/screens/NotFoundPage";
-//import MapPage from "./src/screens/MapPage";
-import ReviewPage from "./src/screens/ReviewPage";
+import MapPage from "./src/screens/MapPage";
 import NewsAndEventsPage from "./src/screens/NewsAndEventsPage";
 import SearchPage from "./src/screens/SearchPage";
 import IndividualNewsPage from "./src/screens/IndividualNewsPage";
+import IntroPage from "./src/screens/IntroPage";
+import LoginPage from "./src/screens/LoginPage";
+import VerificationPage from "./src/screens/VerificationPage";
+import SignupPage from "./src/screens/SignupPage";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -17,13 +20,17 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="ReviewPage" // set to ReviewPage to debug this branch, normally 'LogIn'
+        initialRouteName="LogIn"
         screenOptions={{
           headerShown: true, // Set to false to hide header
         }}
       >
-        <Stack.Screen name="Home" component={HomePage} />
-        {/* <Stack.Screen name="Map" component={MapPage} /> */}
+        <Stack.Screen name="IntroPage" component={IntroPage} />
+        <Stack.Screen name="LogIn" component={LoginPage} />
+        <Stack.Screen name="Verification" component={VerificationPage} />
+        <Stack.Screen name="Home" component={HomePage} /> 
+        <Stack.Screen name="Signup" component={SignupPage} />
+        <Stack.Screen name="Map" component={MapPage} />
         <Stack.Screen name="NotFound" component={NotFoundPage} />
         <Stack.Screen name="Search" component={SearchPage} />
         <Stack.Screen name="NewsAndEventsPage" component={NewsAndEventsPage} />
@@ -31,12 +38,6 @@ export default function App() {
           name="IndividualNewsPage"
           component={IndividualNewsPage}
         />
-        <Stack.Screen name="ReviewPage" component={
-          ()=><ReviewPage
-            bldgName="Cool Building"
-            bldgDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
-            imgUrl="https://collections.lib.purdue.edu/campus/images/buildings/11-amelia-earhart-residence-hall.jpeg"
-            ></ReviewPage>} />
       </Stack.Navigator>
     </NavigationContainer>
   );

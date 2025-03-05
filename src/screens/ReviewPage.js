@@ -1,25 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { Alert, Image, Switch, View, Text, StyleSheet, TextInput, FlatList } from "react-native";
 import BottomNavbar from "../components/BottomNavbar";
 import ReviewPanel from "../components/ReviewPanel";
+import { Link } from "@react-navigation/native";
 export default function ReviewPage(props) {
-  const bldgName = props.bldgName;
-  const bldgDesc = props.bldgDesc;
-  const imgUrl = props.imgUrl;
-  const imgAltTxt = props.imgAltTxt;
+  const bldgName = "Cool Building";
+  const bldgDesc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+  const imgUrl = "https://collections.lib.purdue.edu/campus/images/buildings/11-amelia-earhart-residence-hall.jpeg";
+  const imgAltTxt = "Building";
 
   const reviewTitle = "Terrible Building Terrible Building Terrible Building Terrible Building Terrible Building";
-  const reviewText = "Worst building i have seen in my life!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+  const reviewText = "Worst building i have seen in my life!!!!!!!!\nThis building is not good.\nThis building should try again.";
   const reviewRating = 4;
-  const isAnonymous = false;
-
-  const handleSubmitForm = () => {
-    if (!reviewText) {
-      Alert.alert('Error', 'Enter all review information.');
-      return;
-    }
-    Alert.alert('Review Submitted!');
-  }
 
   return <>
     <View style={styles.container}>
@@ -41,14 +33,9 @@ export default function ReviewPage(props) {
         {/* link to full description (info about building page link?) */}
       </View>
       <ReviewPanel title={reviewTitle} text={reviewText} rating={reviewRating} pfp={imgUrl} />
-      <View style={styles.writeView}>
-        <TextInput style={styles.reviewTextInput}
-          placeholder="Enter a written review..." /> {/* FORM text field */}
-      </View>
-      <View style={styles.anonView}>
-        <Text style={styles.anonMsg}>Anonymous?</Text> {/* left side of view */}
-        <Switch style={styles.anonBox} value={isAnonymous}/>
-        {/* check box on right side (above), FORM boolean field */}
+      <View style={styles.linkView}>
+        <Link style={styles.link} to="/ReviewPage">Write a Review</Link>
+        <Link style={styles.link} to="/ReviewPage">See All Reviews</Link>
       </View>
     </View>
     <BottomNavbar />
@@ -92,40 +79,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#065758",
   },
-  keywordView: {
 
+  linkView: {
+    width: "80%",
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
-  keywrdHead: {
 
-  },
-  phraseList: {
-
-  },
-  phrase: {
-
-  },
-  loadingPhrases: {
-
-  },
-  writeView: {
-
-  },
-  reviewTextInput: {
-
-  },
-  anonView: {
-
-  },
-  anonMsg: {
-
-  },
-  anonBox: {
-
-  },
-  checkView: {
-
-  },
-  reviewStars: {
-
+  link: {
+    color: "#065758",
+    fontSize: 14,
+    textDecorationLine: "underline",
   }
 });

@@ -12,7 +12,7 @@ const CustomMap = ({
     onBuildingPress(building); // Pass building data to parent component
   };
 
-  console.log("Highlighted  :", highlightedBuildings); // Log to check structure
+  // console.log("Highlighted  :", highlightedBuildings); // Log to check structure
 
   // Ensure the coordinates are in the correct format
   const parseCoordinates = (coordinates) =>
@@ -23,10 +23,10 @@ const CustomMap = ({
 
   if (highlightedBuildings && highlightedBuildings.length > 0) {
     highlightedBuildings.forEach((building, index) => {
-      console.log(
-        `Building ${index} Coordinates:`,
-        parseCoordinates(building.coordinates)
-      );
+      // console.log(
+      //   `Building ${index} Coordinates:`,
+      //   parseCoordinates(building.coordinates)
+      // );
     });
   } else {
     console.log("No buildings available or highlightedBuildings is invalid.");

@@ -61,8 +61,8 @@ const GoogleSignInButton = () => {
 
 export default function LoginPage() {
   const navigation = useNavigation();
-  //const [username, setUsername] = useState('');
-  //const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLoginEmail = async () => {
     Alert.alert("Waiting for verification...");
@@ -81,10 +81,10 @@ export default function LoginPage() {
 
   };
 
-  const handleLoginPhone = () => {
-    console.log("Going to Verification Page...");
-    navigation.navigate("Verification");
-  };
+  // const handleLoginPhone = () => {
+  //   console.log("Going to Verification Page...");
+  //   navigation.navigate("Verification");
+  // };
 
   const handleCreate = () => {
     navigation.navigate("Signup");
@@ -93,15 +93,24 @@ export default function LoginPage() {
   return (
     <View style={styles.container}>
       <Image
-        source={require("./purduepaths.png")} // Path to your image
+        source={require("../../assets/purduepaths.png")}
         style={styles.image}
       />
-      <Text style={styles.title}>Login</Text>
-      <TouchableOpacity style={styles.emailButton} onPress={handleLoginEmail}>
-        <Text style={styles.buttonText}>Login With Email</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.phoneButton} onPress={handleLoginPhone}>
-        <Text style={styles.buttonText}>Login With Phone Number</Text>
+      <Text style={styles.title}>Login or Sign Up</Text>
+      <TextInput
+                style={styles.input}
+                placeholder="Username"
+                value={username}
+                onChangeText={setUsername}
+      />
+      <TextInput
+                style={styles.input}
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+      />
+      <TouchableOpacity style={styles.loginButton} onPress={handleLoginEmail}>  
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
       <View style={styles.row}>
@@ -134,23 +143,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#020202",
     marginBottom: 12,
-    borderRadius: 5,
+    borderRadius: 10,
   },
-  emailButton: {
+  loginButton: {
     backgroundColor: "#d06c64",
     width: "80%",
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 10,
     marginBottom: 10,
-  },
-  phoneButton: {
-    backgroundColor: "#d06c64",
-    width: "80%",
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 10,
-    marginBottom: 24,
   },
   buttonText: {
     textAlign: "center",

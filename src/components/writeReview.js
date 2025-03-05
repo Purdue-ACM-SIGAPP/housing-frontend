@@ -24,6 +24,12 @@ const ReviewForm = () => {
     setReview("");
   };
 
+  const handleCancel = () => {
+    setReviewTitle("");
+    setBuilding("");
+    setReview("");
+  };
+
   return (
     <View style={styles.container}>
       <Image 
@@ -53,6 +59,7 @@ const ReviewForm = () => {
       />
 
       <Button title="Submit Review" onPress={handleSubmit} />
+      <Button title="Cancel" onPress={handleCancel} />
     </View>
   );
 };

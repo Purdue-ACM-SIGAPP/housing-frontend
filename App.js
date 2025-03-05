@@ -13,6 +13,7 @@ import IntroPage from "./src/screens/IntroPage";
 import LoginPage from "./src/screens/LoginPage";
 import VerificationPage from "./src/screens/VerificationPage";
 import SignupPage from "./src/screens/SignupPage";
+import BuildingList from "./src/screens/BuildingList";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -20,7 +21,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="LogIn"
+        initialRouteName="BuildingList"
         screenOptions={{
           headerShown: true, // Set to false to hide header
         }}
@@ -28,12 +29,13 @@ export default function App() {
         <Stack.Screen name="IntroPage" component={IntroPage} />
         <Stack.Screen name="LogIn" component={LoginPage} />
         <Stack.Screen name="Verification" component={VerificationPage} />
-        <Stack.Screen name="Home" component={HomePage} /> 
+        <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="Signup" component={SignupPage} />
         <Stack.Screen name="Map" component={MapPage} />
         <Stack.Screen name="NotFound" component={NotFoundPage} />
         <Stack.Screen name="Search" component={SearchPage} />
         <Stack.Screen name="NewsAndEventsPage" component={NewsAndEventsPage} />
+        <Stack.Screen name="BuildingList" component={BuildingList} />
         <Stack.Screen
           name="IndividualNewsPage"
           component={IndividualNewsPage}

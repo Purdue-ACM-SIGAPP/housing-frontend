@@ -11,10 +11,13 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import { purduepaths } from "../../assets";
+
 //export default GoogleSignInButton;
 
 export default function IntroPage() {
-  const { user, expoGoLogin, expoGoLogout, isExpoGo, setUser } = useCustomAuth();
+  const { user, expoGoLogin, expoGoLogout, isExpoGo, setUser } =
+    useCustomAuth();
   const navigation = useNavigation();
 
   // Redirect user to HomePage after login
@@ -28,8 +31,7 @@ export default function IntroPage() {
     <View style={styles.container}>
       {/* Text Purdue Paths */}
       <View style={styles.titleSpace}>
-        <View class="circle" style={styles.circle}>
-        </View>
+        <View class="circle" style={styles.circle}></View>
         <Text style={styles.titleText}>
           <Text style={styles.Purdue}>Purdue</Text>
           <Text style={styles.Paths}>Paths</Text>
@@ -37,10 +39,7 @@ export default function IntroPage() {
       </View>
 
       {/* Image */}
-      <Image
-        source={require("./purduepaths.png")}
-        style={styles.image}
-      />
+      <Image source={purduepaths} style={styles.image} />
 
       {/* Buttons */}
       <View style={styles.ButtonSpace}>
@@ -55,7 +54,7 @@ export default function IntroPage() {
         ) : isExpoGo ? (
           <TouchableOpacity style={styles.loginButton} onPress={expoGoLogin}>
             <Text style={styles.loginText}>Log in</Text>
-           </TouchableOpacity>
+          </TouchableOpacity>
         ) : (
           <LoginButton setUser={setUser} />
         )}

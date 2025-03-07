@@ -30,14 +30,17 @@ export default function App() {
           }}
         >
           <Stack.Screen name="LandingPage" component={LandingPage} />
-//           <Stack.Screen name="LogIn" component={LoginPage} />
-//           <Stack.Screen name="Verification" component={VerificationPage} />
+          <Stack.Screen name="LogIn" component={LoginPage} />
+          <Stack.Screen name="Verification" component={VerificationPage} />
           <Stack.Screen name="Home" component={HomePage} />
-//           <Stack.Screen name="Signup" component={SignupPage} />
+          <Stack.Screen name="Signup" component={SignupPage} />
           <Stack.Screen name="Map" component={MapPage} />
           <Stack.Screen name="NotFound" component={NotFoundPage} />
           <Stack.Screen name="Search" component={SearchPage} />
-          <Stack.Screen name="NewsAndEventsPage" component={NewsAndEventsPage} />
+          <Stack.Screen
+            name="NewsAndEventsPage"
+            component={NewsAndEventsPage}
+          />
           <Stack.Screen name="BuildingList" component={BuildingList} />
           <Stack.Screen
             name="IndividualNewsPage"

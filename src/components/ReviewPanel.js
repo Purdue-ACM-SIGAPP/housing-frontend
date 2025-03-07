@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         borderWidth: 5,
         borderColor: "#CDDDDE",
         backgroundColor: "#065758",
-        width: "80%",
+        width: "100%",
         borderRadius: 15,
         minHeight: 250,
         paddingBottom: 10
@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
       },
     text: {
-        fontSize: 12,
+        fontSize: 15,
         color: "#CDDDDE",
     },
     showMore: {
         color: "#CDDDDE",
-        fontSize: 12,
+        fontSize: 15,
         textDecorationLine: "underline",
     },
     pfp: {

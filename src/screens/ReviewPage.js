@@ -2,7 +2,8 @@ import React from "react";
 import { Alert, Image, Switch, View, Text, StyleSheet, TextInput, FlatList } from "react-native";
 import BottomNavbar from "../components/BottomNavbar";
 import ReviewPanel from "../components/ReviewPanel";
-import { Link } from "@react-navigation/native";
+import { Link, useNavigation, useRoute } from "@react-navigation/native";
+
 export default function ReviewPage(props) {
   const bldgName = "Cool Building";
   const bldgDesc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
@@ -12,6 +13,9 @@ export default function ReviewPage(props) {
   const reviewTitle = "Terrible Building Terrible Building Terrible Building Terrible Building Terrible Building";
   const reviewText = "Worst building i have seen in my life!!!!!!!!\nThis building is not good.\nThis building should try again.";
   const reviewRating = 4;
+
+  const route = useRoute();
+  const buildingData = route.params.data;
 
   return <>
     <View style={styles.container}>

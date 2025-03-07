@@ -4,6 +4,7 @@ import CustomMap from "../components/CustomMap";
 import BottomNavbar from "../components/BottomNavbar";
 import { API_BASE_URL } from "@env";
 import buildings from "../constants/buildings.json";
+import { useNavigation } from "@react-navigation/native";
 
 export default function MapPage({ initialLatitude, initialLongitude }) {
   const [markerPosition, setMarkerPosition] = useState({
@@ -12,6 +13,8 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
   });
   const [buildingData, setBuildingData] = useState(null);
   const [highlightedBuildings, setHighlightedBuildings] = useState([]);
+  const navigation = useNavigation();
+
 
   const fetchBuildings = async () => {
     try {
@@ -66,7 +69,8 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
         `${API_BASE_URL}/api/Building/${building.buildingID}`
       );
       const data = await response.json();
-      console.log(data);
+      
+      navigation.navigate("ReviewPage", {data});
     } catch (error) {
       console.error("Error fetching building data:", error);
     }

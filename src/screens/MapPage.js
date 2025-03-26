@@ -63,13 +63,13 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
 
   const handleBuildingPress = async (building) => {
     setBuildingData(building); // Set building data on polygon press
-    console.log("Building Pressed:", typeof building.buildingID);
     try {
       const response = await fetch(
         `${API_BASE_URL}/api/Building/${building.buildingID}`
       );
       const data = await response.json();
       navigation.navigate("ReviewPage", {data});
+      await setTimeout(10);
     } catch (error) {
       console.error("Error fetching building data:", error);
     }
@@ -84,7 +84,6 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
       <CustomMap
         markerPosition={markerPosition}
         onMapPress={(coordinate) => {
-          console.log(coordinate);
           setMarkerPosition(coordinate)}} // Simply update marker position
         // onMapPress={handleMapPress}
         highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap

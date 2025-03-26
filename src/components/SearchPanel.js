@@ -1,13 +1,12 @@
 // BottomNavbar.js
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, Image, FlatList, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from "react-native";
 import theme from "../utils/theme.js"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-const SearchPanel = () => {
+const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
     const [text, onChangeText] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
-
     const fetchSearchResults = async () => {
         console.log(text);
         try {
@@ -40,6 +39,12 @@ const SearchPanel = () => {
         Keyboard.dismiss();
     };
 
+    useEffect(() => {
+        if (!isInSearchBar) {
+            dismissDropdown();
+        }
+    }, [isInSearchBar]);
+
     return (
         <TouchableWithoutFeedback onPress={dismissDropdown} accessible={false}>
             <View style={styles.searchPanel}>
@@ -50,6 +55,7 @@ const SearchPanel = () => {
 
                     <TextInput
                         style={styles.searchBar}
+                        onPress={() => setIsInSearchBar(true)}
                         onChangeText={onChangeText}
                         placeholder="Building Name..."
                         onSubmitEditing={fetchSearchResults}>

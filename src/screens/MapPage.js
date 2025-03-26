@@ -12,7 +12,8 @@ export default function MapPage() {
   });
   const [buildingData, setBuildingData] = useState(null);
   const [highlightedBuildings, setHighlightedBuildings] = useState([]);
-
+  const [isInSearchBar, setIsInSearchBar] = useState(false);
+  
   const fetchBuildings = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/Building/`, {
@@ -110,10 +111,16 @@ export default function MapPage() {
 
   return (
     <View style={styles.container}>
-      <SearchPanel />
+      <SearchPanel 
+        isInSearchBar={isInSearchBar}
+        setIsInSearchBar={setIsInSearchBar}
+      />
       <CustomMap
         markerPosition={markerPosition}
-        onMapPress={(coordinate) => setMarkerPosition(coordinate)} // Simply update marker position
+        onMapPress={(coordinate) => {
+          setIsInSearchBar(false);
+          setMarkerPosition(coordinate)
+        }} // Simply update marker position
         // onMapPress={handleMapPress}
         highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap
         onBuildingPress={handleBuildingPress}

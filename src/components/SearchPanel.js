@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, Image, FlatList, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from "react-native";
 import theme from "../utils/theme.js"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { API_BASE_URL } from "@env";
 
 const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
     const [text, onChangeText] = React.useState("");
@@ -10,7 +11,7 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
     const fetchSearchResults = async () => {
         console.log(text);
         try {
-            const response = await fetch(`http://10.186.75.221:5128/api/Building?query=` + text, {
+            const response = await fetch(`${API_BASE_URL}/api/Building?query=` + text, {
                 method: "GET",
             });
 
@@ -89,30 +90,30 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
 
                 <View style={styles.filterButtonContainer}>
                     <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>JButton</Text>
+                        <Text style={styles.filterButtonText}>Academic</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>JButton</Text>
+                        <Text style={styles.filterButtonText}>Residential</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>JButton</Text>
+                        <Text style={styles.filterButtonText}>Dining Hall</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>JButton</Text>
+                        <Text style={styles.filterButtonText}>Facilities</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.filterButtonContainer}>
                     <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>JButton</Text>
+                        <Text style={styles.filterButtonText}>Shopping</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>JButton</Text>
+                        <Text style={styles.filterButtonText}>Study</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>JButton</Text>
+                        <Text style={styles.filterButtonText}>Restaurants</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>JButton</Text>
+                        <Text style={styles.filterButtonText}>Health</Text>
                     </TouchableOpacity>
                 </View>
             </View >

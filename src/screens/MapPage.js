@@ -4,6 +4,7 @@ import CustomMap from "../components/CustomMap";
 import BottomNavbar from "../components/BottomNavbar";
 import { API_BASE_URL } from "@env";
 import buildings from "../constants/buildings.json";
+import { useNavigation } from "@react-navigation/native";
 
 export default function MapPage({ initialLatitude, initialLongitude }) {
   const [markerPosition, setMarkerPosition] = useState({
@@ -12,6 +13,8 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
   });
   const [buildingData, setBuildingData] = useState(null);
   const [highlightedBuildings, setHighlightedBuildings] = useState([]);
+  const navigation = useNavigation();
+
 
   const fetchBuildings = async () => {
     try {
@@ -60,13 +63,13 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
 
   const handleBuildingPress = async (building) => {
     setBuildingData(building); // Set building data on polygon press
-    console.log("Building Pressed:", typeof building.buildingID);
     try {
       const response = await fetch(
         `${API_BASE_URL}/api/Building/${building.buildingID}`
       );
       const data = await response.json();
-      console.log(data);
+      navigation.navigate("ReviewPage", {data});
+      await setTimeout(10);
     } catch (error) {
       console.error("Error fetching building data:", error);
     }
@@ -80,7 +83,8 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
     <View style={styles.container}>
       <CustomMap
         markerPosition={markerPosition}
-        onMapPress={(coordinate) => setMarkerPosition(coordinate)} // Simply update marker position
+        onMapPress={(coordinate) => {
+          setMarkerPosition(coordinate)}} // Simply update marker position
         // onMapPress={handleMapPress}
         highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap
         onBuildingPress={handleBuildingPress}

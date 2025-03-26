@@ -89,7 +89,10 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
       />
       <CustomMap
         markerPosition={markerPosition}
-        onMapPress={(coordinate) => setMarkerPosition(coordinate)} // Simply update marker position
+        onMapPress={(coordinate) => {
+          setIsInSearchBar(false);
+          setMarkerPosition(coordinate)
+        }} // Simply update marker position
         // onMapPress={handleMapPress}
         highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap
         onBuildingPress={handleBuildingPress}

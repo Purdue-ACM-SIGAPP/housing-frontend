@@ -22,7 +22,7 @@ const BottomNavbar = () => {
         <Icon name="map-marker" size={36} color="#000" />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Search")}
+        onPress={() => navigation.navigate("BuildingList")}
         style={styles.navItem}
       >
         <Icon name="web" size={36} color="#000" />

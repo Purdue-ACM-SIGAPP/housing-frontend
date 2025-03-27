@@ -105,15 +105,6 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
           >
             <Text style={styles.closeText}>x</Text>
           </TouchableOpacity>
-          <View>
-            <Text style={styles.buildingName}>{buildingData.id}</Text>
-            <Text style={styles.buildingAddress}>Coordinates:</Text>
-            {/* {buildingData.coordinates.map((coord, index) => (
-              <Text key={index} style={styles.coordinateText}>
-                Lat: {coord.latitude}, Lng: {coord.longitude}
-              </Text>
-            ))} */}
-          </View>
         </View>
       )}
       <BottomNavbar />

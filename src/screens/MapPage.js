@@ -71,10 +71,10 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
       );
       const data = await response.json();
       navigation.navigate("ReviewPage", {data});
-      await setTimeout(10);
     } catch (error) {
       console.error("Error fetching building data:", error);
     }
+    await setTimeout(10);
   };
 
   const handleClosePopup = () => {

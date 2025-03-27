@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import SearchPanel from "../components/SearchPanel";
 import CustomMap from "../components/CustomMap";
 import BottomNavbar from "../components/BottomNavbar";
 import { API_BASE_URL } from "@env";
@@ -15,7 +16,8 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
   const [highlightedBuildings, setHighlightedBuildings] = useState([]);
   const navigation = useNavigation();
 
-
+  const [isInSearchBar, setIsInSearchBar] = useState(false);
+  
   const fetchBuildings = async () => {
     try {
       // If there are no buildings, log and return early
@@ -81,10 +83,16 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
 
   return (
     <View style={styles.container}>
+      <SearchPanel 
+        isInSearchBar={isInSearchBar}
+        setIsInSearchBar={setIsInSearchBar}
+      />
       <CustomMap
         markerPosition={markerPosition}
         onMapPress={(coordinate) => {
-          setMarkerPosition(coordinate)}} // Simply update marker position
+          setIsInSearchBar(false);
+          setMarkerPosition(coordinate)
+        }} // Simply update marker position
         // onMapPress={handleMapPress}
         highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap
         onBuildingPress={handleBuildingPress}

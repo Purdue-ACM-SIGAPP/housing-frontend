@@ -6,6 +6,7 @@ export default {
     name: "ClientApp",
     slug: "ClientApp",
     version: "1.0.0",
+    newArchEnabled: true,
     orientation: "portrait",
     icon: "./assets/icon.png",
     userInterfaceStyle: "light",
@@ -19,6 +20,7 @@ export default {
       config: {
         googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
       },
+      // bundleIdentifier: "com.anonymous.ClientApp",
     },
     android: {
       adaptiveIcon: {

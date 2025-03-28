@@ -1,30 +1,80 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import SearchPanel from "../components/SearchPanel";
 import CustomMap from "../components/CustomMap";
+import BottomNavbar from "../components/BottomNavbar";
+import { API_BASE_URL } from "@env";
+import buildings from "../constants/buildings.json";
+import { useNavigation } from "@react-navigation/native";
 
-export default function MapPage() {
+export default function MapPage({ initialLatitude, initialLongitude }) {
   const [markerPosition, setMarkerPosition] = useState({
-    latitude: 40.424925486930064,
-    longitude: -86.91358246116509,
+    latitude: initialLatitude || 40.424925486930064,
+    longitude: initialLongitude || -86.91358246116509,
   });
   const [buildingData, setBuildingData] = useState(null);
+  const [highlightedBuildings, setHighlightedBuildings] = useState([]);
+  const navigation = useNavigation();
 
-  const buildingId = "66ba8693354b31489f8e95b6";
-
-  const handleMapPress = async (coordinate) => {
+  const [isInSearchBar, setIsInSearchBar] = useState(false);
+  
+  const fetchBuildings = async () => {
     try {
-      const response = await fetch(
-        `https://aspdotnet.dev.sigapp.club/api/building/${buildingId}`,
-        {
-          method: "GET",
+      // If there are no buildings, log and return early
+      if (!buildings.list || buildings.list.length === 0) {
+        console.warn("No buildings found");
+        Alert.alert("No buildings found");
+        return;
+      }
+
+      // For each building, fetch the outline
+      const outlines = buildings.list.map((building) => {
+        try {
+          const coordinates = building.coordinates.map((coord) => ({
+            latitude: coord.latitude,
+            longitude: coord.longitude,
+          }));
+
+          return {
+            buildingID: building.buildingID,
+            coordinates: coordinates,
+          };
+        } catch (error) {
+          console.error(
+            `Error fetching outline for building ${building.id}:`,
+            error
+          );
+          return null;
         }
-      );
-      const data = await response.json();
-      setBuildingData(data);
-      setMarkerPosition(coordinate);
+      });
+
+      const validOutlines = outlines.filter((outline) => outline !== null);
+
+      // Set the polygons state with the fetched outlines
+      // console.log(validOutlines);
+      setHighlightedBuildings(validOutlines);
     } catch (error) {
       console.error("Error fetching building data:", error);
     }
+  };
+
+  // Use useEffect to call the fetchBuildings function when the component mounts
+  useEffect(() => {
+    fetchBuildings();
+  }, []);
+
+  const handleBuildingPress = async (building) => {
+    setBuildingData(building); // Set building data on polygon press
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/Building/${building.buildingID}`
+      );
+      const data = await response.json();
+      navigation.navigate("ReviewPage", {data});
+    } catch (error) {
+      console.error("Error fetching building data:", error);
+    }
+    await setTimeout(10);
   };
 
   const handleClosePopup = () => {
@@ -33,7 +83,20 @@ export default function MapPage() {
 
   return (
     <View style={styles.container}>
-      <CustomMap markerPosition={markerPosition} onMapPress={handleMapPress} />
+      <SearchPanel 
+        isInSearchBar={isInSearchBar}
+        setIsInSearchBar={setIsInSearchBar}
+      />
+      <CustomMap
+        markerPosition={markerPosition}
+        onMapPress={(coordinate) => {
+          setIsInSearchBar(false);
+          setMarkerPosition(coordinate)
+        }} // Simply update marker position
+        // onMapPress={handleMapPress}
+        highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap
+        onBuildingPress={handleBuildingPress}
+      />
       {buildingData && (
         <View style={styles.popup}>
           <TouchableOpacity
@@ -42,12 +105,9 @@ export default function MapPage() {
           >
             <Text style={styles.closeText}>x</Text>
           </TouchableOpacity>
-          <View>
-            <Text style={styles.buildingName}>{buildingData.name}</Text>
-            <Text style={styles.buildingAddress}>{buildingData.address}</Text>
-          </View>
         </View>
       )}
+      <BottomNavbar />
     </View>
   );
 }
@@ -55,7 +115,7 @@ export default function MapPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#D1FAE5", // Equivalent to bg-green-100
+    backgroundColor: "#fff",
   },
   popup: {
     position: "absolute",

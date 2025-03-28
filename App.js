@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomePage from "./src/screens/HomePage";
 import NotFoundPage from "./src/screens/NotFoundPage";
 import MapPage from "./src/screens/MapPage";
+import EditProfile from "./src/screens/EditProfile";
 import NewsAndEventsPage from "./src/screens/NewsAndEventsPage";
 import SearchPage from "./src/screens/SearchPage";
 import IndividualNewsPage from "./src/screens/IndividualNewsPage";
@@ -31,6 +32,7 @@ export default function App() {
         <Stack.Screen name="LogIn" component={LoginPage} />
         <Stack.Screen name="Verification" component={VerificationPage} />
         <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen name="Edit Profile" component={EditProfile} />
         <Stack.Screen name="Signup" component={SignupPage} />
         <Stack.Screen name="Map" component={MapPage} />
         <Stack.Screen name="NotFound" component={NotFoundPage} />

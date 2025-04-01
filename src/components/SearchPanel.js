@@ -1,11 +1,12 @@
-// BottomNavbar.js
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, Image, FlatList, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from "react-native";
 import theme from "../utils/theme.js"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { API_BASE_URL } from "@env";
+import { useNavigation } from "@react-navigation/native";
 
 const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
+    const navigation = useNavigation();
     const [text, onChangeText] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
     const fetchSearchResults = async () => {
@@ -40,6 +41,10 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
         Keyboard.dismiss();
     };
 
+    const editProfile = () => {
+        navigation.navigate("Edit Profile");
+    }
+
     useEffect(() => {
         if (!isInSearchBar) {
             dismissDropdown();
@@ -69,7 +74,11 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
                         <Icon name="magnify" size={40} color="#065758" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity><Image source={{ uri: "https://static2.bigstockphoto.com/1/1/3/large1500/311375767.jpg" }} style={styles.profilePicture} /></TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={editProfile}
+                    >
+                        <Image source={{ uri: "https://static2.bigstockphoto.com/1/1/3/large1500/311375767.jpg" }} style={styles.profilePicture} />
+                    </TouchableOpacity>
 
                     {searchResults.length > 0 && (
                         <View style={styles.dropdown}>

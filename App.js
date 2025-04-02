@@ -25,7 +25,7 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="Map"
         screenOptions={{
-          headerShown: true, // Set to false to hide header
+          headerShown: false, // Set to false to hide header
         }}
       >
         <Stack.Screen name="IntroPage" component={IntroPage} />

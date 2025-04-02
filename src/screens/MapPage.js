@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert, SafeAreaView } from "react-native";
 import SearchPanel from "../components/SearchPanel";
 import CustomMap from "../components/CustomMap";
 import BottomNavbar from "../components/BottomNavbar";
@@ -82,7 +82,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <SearchPanel 
         isInSearchBar={isInSearchBar}
         setIsInSearchBar={setIsInSearchBar}
@@ -108,7 +108,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
         </View>
       )}
       <BottomNavbar />
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -1,6 +1,6 @@
 // BottomNavbar.js
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, Image, FlatList, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { View, Text, StyleSheet, TextInput, Image, FlatList, TouchableOpacity, Keyboard, TouchableWithoutFeedback, SafeAreaView } from "react-native";
 import theme from "../utils/theme.js"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { API_BASE_URL } from "@env";
@@ -48,7 +48,7 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
 
     return (
         <TouchableWithoutFeedback onPress={dismissDropdown} accessible={false}>
-            <View style={styles.searchPanel}>
+            <SafeAreaView style={styles.searchPanel}>
                 <View style={styles.searchBarContainer}>
                     <TouchableOpacity style={styles.questionButton}>
                         <Icon name="help" size={36} color="#065758" />
@@ -116,7 +116,7 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
                         <Text style={styles.filterButtonText}>Health</Text>
                     </TouchableOpacity>
                 </View>
-            </View >
+            </SafeAreaView >
         </TouchableWithoutFeedback>
     );
 };
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 10,
+        marginBottom: 10,
     },
     filterButton: {
         height: 30,

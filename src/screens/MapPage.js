@@ -82,7 +82,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <SearchPanel 
         isInSearchBar={isInSearchBar}
         setIsInSearchBar={setIsInSearchBar}
@@ -91,9 +91,8 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
         markerPosition={markerPosition}
         onMapPress={(coordinate) => {
           setIsInSearchBar(false);
-          setMarkerPosition(coordinate)
+          setMarkerPosition(coordinate);
         }} // Simply update marker position
-        // onMapPress={handleMapPress}
         highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap
         onBuildingPress={handleBuildingPress}
       />

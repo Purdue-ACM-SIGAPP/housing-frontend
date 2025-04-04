@@ -51,7 +51,7 @@ const BuildingList = () => {
         } catch (error) {
             console.error("Error fetching building data:", error);
         }
-        await setTimeout(10);
+        await setTimeout(100);
     };
 
 
@@ -123,7 +123,7 @@ const BuildingList = () => {
             <View style={styles.container}>
                 {/* Circles (if needed) */}
                 <View style={styles.circle1} />
-                <View style={styles.circle2} />
+                {/* <View style={styles.circle2} /> */}
                 <View style={styles.circle3} />
 
                 {/* Header */}

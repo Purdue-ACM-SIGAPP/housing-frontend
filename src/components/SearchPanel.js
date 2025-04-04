@@ -48,7 +48,7 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
 
     return (
         <TouchableWithoutFeedback onPress={dismissDropdown} accessible={false}>
-            <SafeAreaView style={styles.searchPanel}>
+            <View style={styles.searchPanel}>
                 <View style={styles.searchBarContainer}>
                     <TouchableOpacity style={styles.questionButton}>
                         <Icon name="help" size={36} color="#065758" />
@@ -85,38 +85,7 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
                         </View>
                     )}
                 </View>
-
-                <View style={styles.moreFilters}><TouchableOpacity style={{ position: "absolute" }}><Text style={styles.moreFiltersText}>More search filters...</Text></TouchableOpacity></View>
-
-                <View style={styles.filterButtonContainer}>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Academic</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Residential</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Dining Hall</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Facilities</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.filterButtonContainer}>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Shopping</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Study</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Restaurants</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Health</Text>
-                    </TouchableOpacity>
-                </View>
-            </SafeAreaView >
+            </View >
         </TouchableWithoutFeedback>
     );
 };
@@ -128,7 +97,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: theme.color.secondary,
         zIndex: 100,
-        paddingTop: 15,
+        paddingTop: 75,
         display: "block",
         alignItems: "center",
         paddingBottom: 15,
@@ -172,7 +141,7 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         alignItems: "center",
-        color: theme.color.primary,
+        color: theme.color.background,
     },
     moreFilters: {
         width: "100%",

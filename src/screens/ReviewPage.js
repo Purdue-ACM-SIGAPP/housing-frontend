@@ -4,21 +4,19 @@ import BottomNavbar from "../components/BottomNavbar";
 import ReviewPanel from "../components/ReviewPanel";
 import { Link, useRoute } from "@react-navigation/native";
 export default function ReviewPage() {
-  const imgUrl = "https://collections.lib.purdue.edu/campus/images/buildings/11-amelia-earhart-residence-hall.jpeg";
-  const imgAltTxt = "Building";
-
   const reviewTitle = "Terrible Building Terrible Building Terrible Building Terrible Building Terrible Building";
   const reviewText = "Worst building i have seen in my life!!!!!!!!\nThis building is not good.\nThis building should try again.";
   const reviewRating = 4;
 
   const route = useRoute();
-  const buildingData = route.params.data;
-  const { id, name, acronym } = route.params.data;
+  const { id, name, image, acronym } = route.params.data;
+  const imgUrl = image ? `data:image/png;base64${image}` : "https://collections.lib.purdue.edu/campus/images/buildings/11-amelia-earhart-residence-hall.jpeg";
+  const imgAltTxt = "Building";
   return <>
   <ScrollView styles={styles.scrollView}>
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image style={styles.bldgImg} source={{ uri: imgUrl }} accessibilityLabel={imgAltTxt} />
+        <Image style={styles.bldgImg} source={{ uri: imgUrl}} accessibilityLabel={imgAltTxt} />
       </View>
       <View style={styles.descView}>
         <Text style={styles.bldgTitle}>{name} ({acronym})</Text>

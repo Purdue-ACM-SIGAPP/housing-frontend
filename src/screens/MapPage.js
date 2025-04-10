@@ -74,7 +74,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
     } catch (error) {
       console.error("Error fetching building data:", error);
     }
-    await setTimeout(10);
+    // await setTimeout(10);
   };
 
   const handleClosePopup = () => {
@@ -82,7 +82,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
+    <SafeAreaView style={styles.container}>
       <SearchPanel 
         isInSearchBar={isInSearchBar}
         setIsInSearchBar={setIsInSearchBar}
@@ -91,8 +91,9 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
         markerPosition={markerPosition}
         onMapPress={(coordinate) => {
           setIsInSearchBar(false);
-          setMarkerPosition(coordinate);
+          setMarkerPosition(coordinate)
         }} // Simply update marker position
+        // onMapPress={handleMapPress}
         highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap
         onBuildingPress={handleBuildingPress}
       />

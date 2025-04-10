@@ -51,7 +51,7 @@ const BuildingList = () => {
         } catch (error) {
             console.error("Error fetching building data:", error);
         }
-        await setTimeout(100);
+        // await setTimeout(100);
     };
 
 
@@ -142,7 +142,7 @@ const BuildingList = () => {
             </View> */}
 
                 {/* FlatList with padding to avoid overlapping */}
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, top: 50, bottom: 50}}>
                     <FlatList
                         data={buildingData}
                         markerPostition={markerPosition}

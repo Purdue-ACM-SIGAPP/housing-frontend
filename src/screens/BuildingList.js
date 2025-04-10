@@ -142,7 +142,7 @@ const BuildingList = () => {
             </View> */}
 
                 {/* FlatList with padding to avoid overlapping */}
-                <View style={{ flex: 1, top: 50, bottom: 50}}>
+                <View style={{ flex: 1, top: 65}}>
                     <FlatList
                         data={buildingData}
                         markerPostition={markerPosition}
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
         borderColor: "#ddd",
         //alignItems: "center",
         justifyContent: "space-between",
-        width: 250,
+        width: width * 0.50,
     },
     directionsContainer: {
         flexDirection: "column",
@@ -227,10 +227,12 @@ const styles = StyleSheet.create({
         borderColor: "#ddd",
         alignItems: "center",
         justifyContent: "space-between",
-        width: width * 0.931,
+        textAlign: "center",
+        width: "90%",
     },
     textContainer: {
         marginLeft: 10,
+        width: "100%",
     },
     itemText: {
         fontSize: 15,

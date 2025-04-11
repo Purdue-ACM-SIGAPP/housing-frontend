@@ -11,7 +11,7 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
     const fetchSearchResults = async () => {
         console.log(text);
         try {
-            const response = await fetch(`${API_BASE_URL}/api/Building?query=` + text, {
+            const response = await fetch(`${API_BASE_URL}/api/Building?query=` + text + "/", {
                 method: "GET",
             });
 

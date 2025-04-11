@@ -60,10 +60,19 @@ const BuildingList = () => {
     }, []);
 
     // Handle building name press
-    const handleBuildingPress = (buildingName) => {
-        setBuildingData(building); // Set building data on polygon press
-        navigation.navigate("BuildingDetail", { buildingName });
-    };
+    const handleBuildingPress = async (id) => {
+        // setBuildingData(building); // Set building data on polygon press
+        try {
+          const response = await fetch(
+            `${API_BASE_URL}/api/Building/${id}`
+          );
+          const data = await response.json();
+          navigation.navigate("ReviewPage", {data});
+        } catch (error) {
+          console.error("Error fetching building data:", error);
+        }
+        // await setTimeout(10);
+      };
 
     // Handle directions press
     const handleDirectionsPress = (building) => {
@@ -88,7 +97,7 @@ const BuildingList = () => {
                     <View style={styles.topCont}>
                         <View style={styles.columnTop}>
                             <View style={styles.textContainer}>
-                                <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
+                                <TouchableOpacity onPress={() => handleBuildingPress(item.id)}>
                                     <Text style={styles.itemText}>{item.name + " (" + item.acronym + ")"}</Text>
                                 </TouchableOpacity>
                             </View>
@@ -142,7 +151,7 @@ const BuildingList = () => {
             </View> */}
 
                 {/* FlatList with padding to avoid overlapping */}
-                <View style={{ flex: 1, top: 65}}>
+                <View style={{ flex: 1, top: 65 }}>
                     <FlatList
                         data={buildingData}
                         markerPostition={markerPosition}

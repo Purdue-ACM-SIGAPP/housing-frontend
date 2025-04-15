@@ -3,8 +3,14 @@ import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import CustomMap from "../components/CustomMap";
 import BottomNavbar from "../components/BottomNavbar";
 import { API_BASE_URL } from "@env";
+import { useRoute } from "@react-navigation/native";
 
-export default function MapPage({ initialLatitude, initialLongitude }) {
+
+export default function MapPage() {
+  
+  const route = useRoute();
+  const { initialLatitude, initialLongitude } = route.params || {};
+  
   const [markerPosition, setMarkerPosition] = useState({
     latitude: initialLatitude || 40.424925486930064,
     longitude: initialLongitude || -86.91358246116509,
@@ -96,8 +102,10 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
 
   // Use useEffect to call the fetchBuildings function when the component mounts
   useEffect(() => {
-    fetchBuildings();
-  }, []);
+    if (initialLatitude && initialLongitude) {
+      setMarkerPosition({ latitude: initialLatitude, longitude: initialLongitude });
+    }
+  }, [initialLatitude, initialLongitude]);
 
   const handleBuildingPress = (building) => {
     setBuildingData(building); // Set building data on polygon press

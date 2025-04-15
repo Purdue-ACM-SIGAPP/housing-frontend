@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Alert, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  SafeAreaView,
+} from "react-native";
 import SearchPanel from "../components/SearchPanel";
 import CustomMap from "../components/CustomMap";
 import BottomNavbar from "../components/BottomNavbar";
 import { API_BASE_URL } from "@env";
 import buildings from "../constants/buildings.json";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-export default function MapPage({ initialLatitude, initialLongitude }) {
+export default function MapPage() {
+  const route = useRoute();
+  const { initialLatitude, initialLongitude } = route.params || {};
+
   const [markerPosition, setMarkerPosition] = useState({
     latitude: initialLatitude || 40.424925486930064,
     longitude: initialLongitude || -86.91358246116509,
@@ -17,7 +27,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
   const navigation = useNavigation();
 
   const [isInSearchBar, setIsInSearchBar] = useState(false);
-  
+
   const fetchBuildings = async () => {
     try {
       // If there are no buildings, log and return early
@@ -60,8 +70,13 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
 
   // Use useEffect to call the fetchBuildings function when the component mounts
   useEffect(() => {
-    fetchBuildings();
-  }, []);
+    if (initialLatitude && initialLongitude) {
+      setMarkerPosition({
+        latitude: initialLatitude,
+        longitude: initialLongitude,
+      });
+    }
+  }, [initialLatitude, initialLongitude]);
 
   const handleBuildingPress = async (building) => {
     setBuildingData(building); // Set building data on polygon press
@@ -70,7 +85,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
         `${API_BASE_URL}/api/Building/${building.buildingID}`
       );
       const data = await response.json();
-      navigation.navigate("ReviewPage", {data});
+      navigation.navigate("ReviewPage", { data });
     } catch (error) {
       console.error("Error fetching building data:", error);
     }
@@ -83,7 +98,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <SearchPanel 
+      <SearchPanel
         isInSearchBar={isInSearchBar}
         setIsInSearchBar={setIsInSearchBar}
       />
@@ -91,7 +106,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
         markerPosition={markerPosition}
         onMapPress={(coordinate) => {
           setIsInSearchBar(false);
-          setMarkerPosition(coordinate)
+          setMarkerPosition(coordinate);
         }} // Simply update marker position
         // onMapPress={handleMapPress}
         highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap

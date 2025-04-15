@@ -26,6 +26,7 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
         } catch (error) {
             console.error("Error fetching search results:", error);
         }
+        await setTimeout(1000);
     };
 
     const handleSelectItem = (item) => {

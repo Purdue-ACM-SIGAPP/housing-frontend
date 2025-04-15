@@ -74,7 +74,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
     } catch (error) {
       console.error("Error fetching building data:", error);
     }
-    // await setTimeout(10);
+    await setTimeout(1000);
   };
 
   const handleClosePopup = () => {

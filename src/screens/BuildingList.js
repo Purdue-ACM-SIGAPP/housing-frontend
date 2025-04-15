@@ -49,6 +49,7 @@ const BuildingList = () => {
         } catch (error) {
             console.error("Error fetching building data:", error);
         }
+        await setTimeout(10);
     };
     
 

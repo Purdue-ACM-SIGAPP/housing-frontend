@@ -1,94 +1,62 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  SafeAreaView,
+} from "react-native";
+import SearchPanel from "../components/SearchPanel";
 import CustomMap from "../components/CustomMap";
 import BottomNavbar from "../components/BottomNavbar";
 import { API_BASE_URL } from "@env";
-import { useRoute } from "@react-navigation/native";
-
+import buildings from "../constants/buildings.json";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 export default function MapPage() {
-  
   const route = useRoute();
   const { initialLatitude, initialLongitude } = route.params || {};
-  
+
   const [markerPosition, setMarkerPosition] = useState({
     latitude: initialLatitude || 40.424925486930064,
     longitude: initialLongitude || -86.91358246116509,
   });
   const [buildingData, setBuildingData] = useState(null);
   const [highlightedBuildings, setHighlightedBuildings] = useState([]);
+  const navigation = useNavigation();
+
+  const [isInSearchBar, setIsInSearchBar] = useState(false);
 
   const fetchBuildings = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/Building/`, {
-        method: "GET",
-      });
-
-      // Check if the response is successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`Failed to fetch buildings: ${response.statusText}`);
-      }
-
-      const buildings = await response.json().catch((error) => {
-        console.error("Error parsing JSON:", error);
-        return null; // Return null if JSON parsing fails
-      });
-
-      if (!buildings) {
-        console.error("Failed to parse buildings JSON:", response);
-        return;
-      }
-
       // If there are no buildings, log and return early
-      if (!buildings || buildings.length === 0) {
+      if (!buildings.list || buildings.list.length === 0) {
         console.warn("No buildings found");
         Alert.alert("No buildings found");
         return;
       }
 
       // For each building, fetch the outline
-      const outlines = await Promise.all(
-        buildings.map(async (building) => {
-          try {
-            const outlineResponse = await fetch(
-              `${API_BASE_URL}/api/Building/outline?id=${building.id}&radius=0.0001`
-            );
+      const outlines = buildings.list.map((building) => {
+        try {
+          const coordinates = building.coordinates.map((coord) => ({
+            latitude: coord.latitude,
+            longitude: coord.longitude,
+          }));
 
-            const outlineData = await outlineResponse.json();
-
-            if (!outlineData || outlineData.length === 0) {
-              //console.warn(`No outline data found for building ${building.id}`);
-              return null; // Skip this building if no outline data is found
-            }
-
-            // Assuming outlineData is an array with one object containing `coordinates`
-            const buildingOutline = outlineData[0]; // Get the first object
-            if (!buildingOutline || !buildingOutline.coordinates) {
-              console.warn(
-                `Invalid outline structure for building ${building.id}`
-              );
-              return null;
-            }
-
-            // Extract the coordinates from the structure (assuming { latitude, longitude })
-            const coordinates = buildingOutline.coordinates.map((coord) => ({
-              latitude: coord.latitude, // If the object contains `latitude` and `longitude`
-              longitude: coord.longitude,
-            }));
-
-            return {
-              id: building.id,
-              coordinates: coordinates,
-            };
-          } catch (error) {
-            console.error(
-              `Error fetching outline for building ${building.id}:`,
-              error
-            );
-            return null;
-          }
-        })
-      );
+          return {
+            buildingID: building.buildingID,
+            coordinates: coordinates,
+          };
+        } catch (error) {
+          console.error(
+            `Error fetching outline for building ${building.id}:`,
+            error
+          );
+          return null;
+        }
+      });
 
       const validOutlines = outlines.filter((outline) => outline !== null);
 
@@ -103,12 +71,25 @@ export default function MapPage() {
   // Use useEffect to call the fetchBuildings function when the component mounts
   useEffect(() => {
     if (initialLatitude && initialLongitude) {
-      setMarkerPosition({ latitude: initialLatitude, longitude: initialLongitude });
+      setMarkerPosition({
+        latitude: initialLatitude,
+        longitude: initialLongitude,
+      });
     }
   }, [initialLatitude, initialLongitude]);
 
-  const handleBuildingPress = (building) => {
+  const handleBuildingPress = async (building) => {
     setBuildingData(building); // Set building data on polygon press
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/Building/${building.buildingID}`
+      );
+      const data = await response.json();
+      navigation.navigate("ReviewPage", { data });
+    } catch (error) {
+      console.error("Error fetching building data:", error);
+    }
+    await setTimeout(10);
   };
 
   const handleClosePopup = () => {
@@ -116,10 +97,17 @@ export default function MapPage() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <SearchPanel
+        isInSearchBar={isInSearchBar}
+        setIsInSearchBar={setIsInSearchBar}
+      />
       <CustomMap
         markerPosition={markerPosition}
-        onMapPress={(coordinate) => setMarkerPosition(coordinate)} // Simply update marker position
+        onMapPress={(coordinate) => {
+          setIsInSearchBar(false);
+          setMarkerPosition(coordinate);
+        }} // Simply update marker position
         // onMapPress={handleMapPress}
         highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap
         onBuildingPress={handleBuildingPress}
@@ -132,19 +120,10 @@ export default function MapPage() {
           >
             <Text style={styles.closeText}>x</Text>
           </TouchableOpacity>
-          <View>
-            <Text style={styles.buildingName}>{buildingData.id}</Text>
-            <Text style={styles.buildingAddress}>Coordinates:</Text>
-            {/* {buildingData.coordinates.map((coord, index) => (
-              <Text key={index} style={styles.coordinateText}>
-                Lat: {coord.latitude}, Lng: {coord.longitude}
-              </Text>
-            ))} */}
-          </View>
         </View>
       )}
       <BottomNavbar />
-    </View>
+    </SafeAreaView>
   );
 }
 

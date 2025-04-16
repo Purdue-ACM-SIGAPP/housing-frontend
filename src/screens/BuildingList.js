@@ -78,7 +78,7 @@ const BuildingList = () => {
     const handleDirectionsPress = (building) => {
         const longitude = building.longitude;
         const latitude = building.latitude;
-        setMarkerPosition(latitude, longitude)
+        setMarkerPosition({latitude, longitude});
         navigation.navigate("Map", {
             initialLatitude: latitude,
             initialLongitude: longitude,
@@ -87,32 +87,43 @@ const BuildingList = () => {
 
 
     // Render each building item
-    const renderBuilding = ({ item }) => (
-        <>
-            <View style={styles.topCont}>
-                <View style={styles.imageContainer}>
-                    <Image source={'/Users/wmali1/RiderProjects/housing-frontend/src/screens/pmu.png'} style={styles.image} />
-                </View>
-                <View style={styles.itemContainer}>
-                    <View style={styles.topCont}>
-                        <View style={styles.columnTop}>
-                            <View style={styles.textContainer}>
-                                <TouchableOpacity onPress={() => handleBuildingPress(item.id)}>
-                                    <Text style={styles.itemText}>{item.name + " (" + item.acronym + ")"}</Text>
-                                </TouchableOpacity>
+    const renderBuilding = ({ item }) => {
+        const base64String = item.image;
+        const imageUri = `data:image/png;base64,${base64String}`;
+
+        return (
+            <View>
+                <View style={styles.topCont}>
+                    <View style={styles.imageContainer}>
+                        <Image
+                            source={{ uri: imageUri }}
+                            style={styles.image}
+                        />
+                    </View>
+                    <View style={styles.itemContainer}>
+                        <View style={styles.topCont}>
+                            <View style={styles.columnTop}>
+                                <View style={styles.textContainer}>
+                                    <TouchableOpacity onPress={() => handleBuildingPress(item.name)}>
+                                        <Text style={styles.itemText}>
+                                            {item.name + " (" + item.acronym + ")"}
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <Text style={styles.descriptionText}>{item.address}</Text>
                             </View>
-                            <Text style={styles.descriptionText}>{item.address}</Text>
                         </View>
                     </View>
                 </View>
+                <View style={[styles.directionsContainer, styles.gold]}>
+                    <TouchableOpacity onPress={() => handleDirectionsPress(item)}>
+                        <Text style={styles.directionsText}>{"Directions 📍"}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={[styles.directionsContainer, styles.gold]}>
-                <TouchableOpacity onPress={() => handleDirectionsPress(item)}>
-                    <Text style={styles.directionsText}>{"Directions 📍"}</Text>
-                </TouchableOpacity>
-            </View>
-        </>
-    );
+        );
+    };
+
 
     // Handle map button press
     const handleMapButtonPress = () => {
@@ -150,16 +161,15 @@ const BuildingList = () => {
                 </TouchableOpacity>
             </View> */}
 
-                {/* FlatList with padding to avoid overlapping */}
-                <View style={{ flex: 1, top: 65 }}>
-                    <FlatList
-                        data={buildingData}
-                        markerPostition={markerPosition}
-                        renderItem={renderBuilding}
-                        keyExtractor={(item) => item.id}
-                        contentContainerStyle={{ paddingBottom: 80 }} // Add padding for BottomNavbar
-                    />
-                </View>
+            {/* FlatList with padding to avoid overlapping */}
+            <View style={{flex: 1}}>
+                <FlatList
+                    data={buildingData}
+                    markerPostition={markerPosition}
+                    renderItem={renderBuilding}
+                    keyExtractor={(item) => item.id}
+                    contentContainerStyle={{paddingBottom: 80}} // Add padding for BottomNavbar
+                />
             </View>
 
             {/* BottomNavbar positioned at the bottom */}

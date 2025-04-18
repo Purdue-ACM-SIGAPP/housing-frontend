@@ -10,7 +10,7 @@ export default function ReviewPage() {
 
   const route = useRoute();
   const { id, name, image, acronym } = route.params.data;
-  const imgUrl = image ? `data:image/png;base64${image}` : "https://collections.lib.purdue.edu/campus/images/buildings/11-amelia-earhart-residence-hall.jpeg";
+  const imgUrl = `data:image/jpeg;base64,${image}`;
   const imgAltTxt = "Building";
   return <>
   <ScrollView styles={styles.scrollView}>

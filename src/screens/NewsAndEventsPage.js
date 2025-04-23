@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import NewsPanel from "../components/NewsPanel";
 import CustomButton from "../components/CustomButton";
 import theme from "../utils/theme.js"
+import BottomNavbar from "../components/BottomNavbar.js";
 
 export default function NewsAndEventsPage() {
   const navigation = useNavigation();
@@ -69,6 +70,7 @@ export default function NewsAndEventsPage() {
             ></NewsPanel>
           ))}
         </ScrollView>
+        <BottomNavbar />
       </View>
     </TouchableWithoutFeedback>
   );

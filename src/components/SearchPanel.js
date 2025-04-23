@@ -5,13 +5,15 @@ import theme from "../utils/theme.js"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { API_BASE_URL } from "@env";
 
-const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
+// TODO: change search panel to return the set of buildings that match the search.
+// then, update parent components to change their displays based off of this.
+const SearchPanel = ({ isInSearchBar, setIsInSearchBar, onSearchResults }) => {
     const [text, onChangeText] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
     const fetchSearchResults = async () => {
         console.log(text);
         try {
-            const response = await fetch(`${API_BASE_URL}/api/Building?query=` + text, {
+            const response = await fetch(`${API_BASE_URL}/api/Building?query=` + text + "/", {
                 method: "GET",
             });
 
@@ -23,9 +25,13 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
             const data = await response.json();
             // console.log("Fetched data:", data);
             setSearchResults(data);
+            if (onSearchResults) {
+                onSearchResults(data);
+            }
         } catch (error) {
             console.error("Error fetching search results:", error);
         }
+        // await setTimeout(10);
     };
 
     const handleSelectItem = (item) => {
@@ -48,7 +54,7 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
 
     return (
         <TouchableWithoutFeedback onPress={dismissDropdown} accessible={false}>
-            <SafeAreaView style={styles.searchPanel}>
+            <View style={styles.searchPanel}>
                 <View style={styles.searchBarContainer}>
                     <TouchableOpacity style={styles.questionButton}>
                         <Icon name="help" size={36} color="#065758" />
@@ -71,52 +77,9 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
 
                     <TouchableOpacity><Image source={{ uri: "https://static2.bigstockphoto.com/1/1/3/large1500/311375767.jpg" }} style={styles.profilePicture} /></TouchableOpacity>
 
-                    {searchResults.length > 0 && (
-                        <View style={styles.dropdown}>
-                            <FlatList
-                                data={searchResults}
-                                keyExtractor={(item) => item.id.toString()}
-                                renderItem={({ item }) => (
-                                    <TouchableOpacity style={styles.dropdownItem} onPress={() => handleSelectItem(item)}>
-                                        <Text>{item.name}</Text>
-                                    </TouchableOpacity>
-                                )}
-                            />
-                        </View>
-                    )}
+                    
                 </View>
-
-                <View style={styles.moreFilters}><TouchableOpacity style={{ position: "absolute" }}><Text style={styles.moreFiltersText}>More search filters...</Text></TouchableOpacity></View>
-
-                <View style={styles.filterButtonContainer}>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Academic</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Residential</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Dining Hall</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Facilities</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.filterButtonContainer}>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Shopping</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Study</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Restaurants</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Health</Text>
-                    </TouchableOpacity>
-                </View>
-            </SafeAreaView >
+            </View >
         </TouchableWithoutFeedback>
     );
 };
@@ -128,7 +91,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: theme.color.secondary,
         zIndex: 100,
-        paddingTop: 15,
+        paddingTop: 75,
         display: "block",
         alignItems: "center",
         paddingBottom: 15,
@@ -172,7 +135,7 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         alignItems: "center",
-        color: theme.color.primary,
+        color: theme.color.background,
     },
     moreFilters: {
         width: "100%",

@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, Text, FlatList, StyleSheet, View, TouchableOpacity, Image, Dimensions, Alert } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { useNavigation } from "@react-navigation/native";
 import BottomNavbar from "../components/BottomNavbar";
 import { API_BASE_URL } from "@env";
-
+import SearchPanel from "../components/SearchPanel";
+import theme from "../utils/theme.js";
 
 
 const BuildingList = () => {
@@ -15,7 +16,8 @@ const BuildingList = () => {
     });
 
     const [buildingData, setBuildingData] = useState(null);
-    // Sample building data
+
+    const [isInSearchBar, setIsInSearchBar] = useState(false);
 
     const fetchBuildings = async () => {
         try {
@@ -49,19 +51,28 @@ const BuildingList = () => {
         } catch (error) {
             console.error("Error fetching building data:", error);
         }
-        await setTimeout(10);
+        await setTimeout(1000);
     };
-    
+
 
     useEffect(() => {
         fetchBuildings();
     }, []);
 
     // Handle building name press
-    const handleBuildingPress = (buildingName) => {
-        setBuildingData(building); // Set building data on polygon press
-        navigation.navigate("BuildingDetail", {buildingName});
-    };
+    const handleBuildingPress = async (id) => {
+        // setBuildingData(building); // Set building data on polygon press
+        try {
+          const response = await fetch(
+            `${API_BASE_URL}/api/Building/${id}`
+          );
+          const data = await response.json();
+          navigation.navigate("ReviewPage", {data});
+        } catch (error) {
+          console.error("Error fetching building data:", error);
+        }
+        // await setTimeout(10);
+      };
 
     // Handle directions press
     const handleDirectionsPress = (building) => {
@@ -72,6 +83,10 @@ const BuildingList = () => {
             initialLatitude: latitude,
             initialLongitude: longitude,
         });
+    };
+
+    const handleSearchResults = (results) => {
+        setBuildingData(results); 
     };
 
 
@@ -124,28 +139,35 @@ const BuildingList = () => {
     };
 
     return (
-        <SafeAreaView style={{flex: 1}}>
-            {/* Circles (if needed) */}
-            <View style={styles.circle1}/>
-            <View style={styles.circle2}/>
-            <View style={styles.circle3}/>
+        <SafeAreaView style={styles.buildingList} edges={["top"]}>
+            <SearchPanel
+                isInSearchBar={isInSearchBar}
+                setIsInSearchBar={setIsInSearchBar}
+                onSearchResults={handleSearchResults}
+            />
+            <View style={styles.container}>
+                {/* Circles (if needed) */}
+                <View style={styles.circle1} />
+                {/* <View style={styles.circle2} /> */}
+                <View style={styles.circle3} />
 
-            {/* Header */}
-            <Image
+                {/* Header */}
+                {/* <Image
                 source={require("./listofbuildings.png")}
                 style={styles.headerImage}
-            />
-            <View style={styles.header}>
+            /> */}
+
+                {/* <View style={styles.header}>
                 <TouchableOpacity style={styles.sortButton} onPress={handleSortButtonPress}>
                     <Text style={styles.mapButtonText}>Sort By</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.mapButton} onPress={handleMapButtonPress}>
                     <Text style={styles.mapButtonText}>Map</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
 
             {/* FlatList with padding to avoid overlapping */}
-            <View style={{flex: 1, marginLeft: -5}}>
+            <View style={{flex: 1}}>
                 <FlatList
                     data={buildingData}
                     markerPostition={markerPosition}
@@ -156,22 +178,24 @@ const BuildingList = () => {
             </View>
 
             {/* BottomNavbar positioned at the bottom */}
-            <View style={styles.bottomNavbarContainer}>
-                <BottomNavbar/>
-            </View>
+            <BottomNavbar />
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+    buildingList: {
+        flex: 1,
+        backgroundColor: "#fff",
+    },
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: "#fff",
+        backgroundColor: theme.background,
     },
     bottomNavbarContainer: {
-        position: "absolute", 
-        bottom: -9, 
+        position: "absolute",
+        bottom: -9,
         left: 0,
         right: 0,
     },
@@ -201,6 +225,10 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 10,
     },
+    searchPanel: {
+        flex: 1,
+        marginTop: 100,
+    },
     itemContainer: {
         flexDirection: "column",
         padding: 15,
@@ -211,7 +239,7 @@ const styles = StyleSheet.create({
         borderColor: "#ddd",
         //alignItems: "center",
         justifyContent: "space-between",
-        width: 250,
+        width: width * 0.50,
     },
     directionsContainer: {
         flexDirection: "column",
@@ -223,10 +251,12 @@ const styles = StyleSheet.create({
         borderColor: "#ddd",
         alignItems: "center",
         justifyContent: "space-between",
-        width: width * 0.931,
+        textAlign: "center",
+        width: "90%",
     },
     textContainer: {
         marginLeft: 10,
+        width: "100%",
     },
     itemText: {
         fontSize: 15,
@@ -236,8 +266,8 @@ const styles = StyleSheet.create({
         marginLeft: -15,
     },
     directionsText: {
-        fontSize: 20, 
-        fontWeight: "bold", 
+        fontSize: 20,
+        fontWeight: "bold",
         color: "#ffffff",
         marginTop: 5,
     },
@@ -325,6 +355,7 @@ const styles = StyleSheet.create({
         zIndex: -1, // Render below other components
         pointerEvents: "none", // Make non-interactive
     },
+
 });
 
 export default BuildingList;

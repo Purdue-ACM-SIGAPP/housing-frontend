@@ -5,7 +5,9 @@ import theme from "../utils/theme.js"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { API_BASE_URL } from "@env";
 
-const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
+// TODO: change search panel to return the set of buildings that match the search.
+// then, update parent components to change their displays based off of this.
+const SearchPanel = ({ isInSearchBar, setIsInSearchBar, onSearchResults }) => {
     const [text, onChangeText] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
     const fetchSearchResults = async () => {
@@ -23,10 +25,13 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
             const data = await response.json();
             // console.log("Fetched data:", data);
             setSearchResults(data);
+            if (onSearchResults) {
+                onSearchResults(data);
+            }
         } catch (error) {
             console.error("Error fetching search results:", error);
         }
-        await setTimeout(1000);
+        // await setTimeout(10);
     };
 
     const handleSelectItem = (item) => {
@@ -72,19 +77,7 @@ const SearchPanel = ({ isInSearchBar, setIsInSearchBar }) => {
 
                     <TouchableOpacity><Image source={{ uri: "https://static2.bigstockphoto.com/1/1/3/large1500/311375767.jpg" }} style={styles.profilePicture} /></TouchableOpacity>
 
-                    {searchResults.length > 0 && (
-                        <View style={styles.dropdown}>
-                            <FlatList
-                                data={searchResults}
-                                keyExtractor={(item) => item.id.toString()}
-                                renderItem={({ item }) => (
-                                    <TouchableOpacity style={styles.dropdownItem} onPress={() => handleSelectItem(item)}>
-                                        <Text>{item.name}</Text>
-                                    </TouchableOpacity>
-                                )}
-                            />
-                        </View>
-                    )}
+                    
                 </View>
             </View >
         </TouchableWithoutFeedback>

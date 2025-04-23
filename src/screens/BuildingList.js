@@ -85,6 +85,10 @@ const BuildingList = () => {
         });
     };
 
+    const handleSearchResults = (results) => {
+        setBuildingData(results); 
+    };
+
 
     // Render each building item
     const renderBuilding = ({ item }) => (
@@ -128,6 +132,7 @@ const BuildingList = () => {
             <SearchPanel
                 isInSearchBar={isInSearchBar}
                 setIsInSearchBar={setIsInSearchBar}
+                onSearchResults={handleSearchResults}
             />
             <View style={styles.container}>
                 {/* Circles (if needed) */}

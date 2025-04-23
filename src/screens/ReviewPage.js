@@ -6,6 +6,7 @@ import { Link, useRoute } from "@react-navigation/native";
 export default function ReviewPage() {
   const reviewTitle = "Terrible Building Terrible Building Terrible Building Terrible Building Terrible Building";
   const reviewText = "Worst building i have seen in my life!!!!!!!!\nThis building is not good.\nThis building should try again.";
+  const reviewPfp = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg";
   const reviewRating = 4;
 
   const route = useRoute();
@@ -22,7 +23,7 @@ export default function ReviewPage() {
         <Text style={styles.bldgTitle}>{name} ({acronym})</Text>
         {/* <Text style={styles.bldgDesc}>{bldgDesc}</Text> */}
       
-      <ReviewPanel title={reviewTitle} text={reviewText} rating={reviewRating} pfp={imgUrl} />
+      <ReviewPanel title={reviewTitle} text={reviewText} rating={reviewRating} pfp={reviewPfp} />
       <View style={styles.linkView}>
         <Link style={styles.link} to="/ReviewPage">Write a Review</Link>
         <Link style={styles.link} to="/ReviewPage">See All Reviews</Link>

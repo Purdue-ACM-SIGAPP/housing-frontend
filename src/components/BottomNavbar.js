@@ -1,8 +1,9 @@
 // BottomNavbar.js
 import React from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, SafeAreaView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
+import theme from "../utils/theme.js";
 
 const BottomNavbar = () => {
   const navigation = useNavigation();
@@ -33,18 +34,21 @@ const BottomNavbar = () => {
 
 const styles = StyleSheet.create({
   navbarContainer: {
+    position: "absolute",
     flexDirection: "row",
+    bottom: -10,
     justifyContent: "space-around",
     width: "100%",
     paddingVertical: 8,
     paddingHorizontal: 20,
     marginBottom: 12,
-    backgroundColor: "#fff",
+    backgroundColor: theme.color.background,
     zIndex: 100,
+    paddingBottom: 50,
   },
   navItem: {
     alignItems: "center",
-  },
+  }
 });
 
 export default BottomNavbar;

@@ -163,8 +163,8 @@ const BuildingList = () => {
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.mapButton} onPress={handleMapButtonPress}>
                     <Text style={styles.mapButtonText}>Map</Text>
-                </TouchableOpacity>
-            </View> */}
+                </TouchableOpacity> */}
+            </View>
 
             {/* FlatList with padding to avoid overlapping */}
             <View style={{flex: 1}}>

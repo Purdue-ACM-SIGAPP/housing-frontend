@@ -65,6 +65,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
 
   const handleBuildingPress = async (building) => {
     setBuildingData(building); // Set building data on polygon press
+    await setTimeout(10);
     try {
       const response = await fetch(
         `${API_BASE_URL}/api/Building/${building.buildingID}`
@@ -74,7 +75,7 @@ export default function MapPage({ initialLatitude, initialLongitude }) {
     } catch (error) {
       console.error("Error fetching building data:", error);
     }
-    await setTimeout(10);
+    
   };
 
   const handleClosePopup = () => {

@@ -81,6 +81,7 @@ export default function MapPage() {
 
   const handleBuildingPress = async (building) => {
     setBuildingData(building); // Set building data on polygon press
+    await setTimeout(5);
     try {
       const response = await fetch(
         `${API_BASE_URL}/api/Building/${building.buildingID}`
@@ -90,7 +91,6 @@ export default function MapPage() {
     } catch (error) {
       console.error("Error fetching building data:", error);
     }
-    await setTimeout(1000);
   };
 
   const handleClosePopup = () => {
@@ -113,16 +113,6 @@ export default function MapPage() {
         highlightedBuildings={highlightedBuildings} // Pass the polygons to the CustomMap
         onBuildingPress={handleBuildingPress}
       />
-      {buildingData && (
-        <View style={styles.popup}>
-          <TouchableOpacity
-            onPress={handleClosePopup}
-            style={styles.closeButton}
-          >
-            <Text style={styles.closeText}>x</Text>
-          </TouchableOpacity>
-        </View>
-      )}
       <BottomNavbar />
     </SafeAreaView>
   );

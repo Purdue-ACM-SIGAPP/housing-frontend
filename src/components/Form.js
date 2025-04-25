@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,14 +6,82 @@ import {
   Pressable,
   SafeAreaView,
 } from "react-native";
+import { API_BASE_URL } from "@env";
 
-export default function Form() { 
+export default function Form() {
   const [form, setForm] = React.useState({
     username: "",
     email: "",
     phoneNumber: "",
     accountType: "",
   });
+
+  const [id, setId] = React.useState("");
+
+  const fetchProfile = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/User/67184182f4700e2853851496`, {
+        method: "GET",
+      });
+
+      // Check if the response is successful (status code 200)
+      if (!response.ok) {
+        throw new Error(`Failed to fetch profile: ${response.statusText}`);
+      }
+
+      const profile = await response.json().catch((error) => {
+        console.error("Error parsing JSON:", error);
+        return null; // Return null if JSON parsing fails
+      });
+
+      if (!profile) {
+        console.error("Failed to parse profile JSON:", response);
+        return;
+      }
+
+      // If there are no buildings, log and return early
+      if (!profile || profile.length === 0) {
+        console.warn("No profile found");
+        Alert.alert("No profile found");
+        return;
+      }
+      setId(profile.id.toString());
+      console.log(id);
+      console.log(profile);
+      setForm({ email: profile.id.toString(), username: profile.name.toString(), phoneNumber: profile.phoneNumber.toString(), accountType: profile.accountType.toString() });
+    } catch (error) {
+      console.error("Error fetching profile data:", error);
+    }
+    await setTimeout(10);
+  };
+
+  const editProfile = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/User`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: id,
+          name: form.username,
+          phoneNumber: form.phoneNumber,
+          accountType: form.accountType
+        })
+      });
+
+      // Check if the response is successful (status code 200)
+      if (!response.ok) {
+        throw new Error(`Failed to fetch profile: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error("Error fetching profile data:", error);
+    }
+    await setTimeout(10);
+  }
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <TextInput
@@ -42,7 +110,9 @@ export default function Form() {
         onChangeText={(e) => setForm({ ...form, accountType: e })}
         placeholder="Account Type"
       />
-      <Pressable style={styles.button}>
+      <Pressable
+        onPress={editProfile}
+        style={styles.button}>
         <Text style={styles.buttonText}>Submit</Text>
       </Pressable>
     </SafeAreaView>
